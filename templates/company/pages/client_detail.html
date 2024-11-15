@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}{{ company.name }}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Клиент" %}</h1>
+            </div>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+            {% if perms.company.change_company %}
+            <a href="{% url 'client_edit' company.id %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" >{% trans "Редактировать" %}</a>
+            {% endif %}
+
+        </div>
+    </div>
+</main>
+
+
+
+{% if perms.company.view_company %}
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "О компании" %}</h3>
+        </div>
+        <div class="mt-3 border-t border-gray-100">
+            <dl class="grid grid-rows-5 grid-flow-col gap-1">
+                <div class="py-1  sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Наименование" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.name }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "БИН" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.idn }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Тип" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.get_type_display }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Статус" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.get_status_display }}</dd>
+                </div>
+                {% if company.address %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Адрес" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.address }}</dd>
+                </div>
+                {% endif %}
+                {% if company.email %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "E-mail" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.email }}</dd>
+                </div>
+                {% endif %}
+                {% if company.phone %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Телефон" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.phone }}</dd>
+                </div>
+                {% endif %}
+                {% if company.bank_details %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Банковские реквизиты" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.bank_details }}</dd>
+                </div>
+                {% endif %}
+
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "В блоке" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.blocked_guarantee|intcomma }}₸</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Свободно" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.balance_guarantee|intcomma }}₸</dd>
+                </div>
+
+
+
+
+            </dl>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!--<br>-->
+<!--<h3 class="text-2xl font-bold text-gray-900">Брокеры клиента</h3>-->
+<!--<br>-->
+<!--{% if perms.company.change_company %}-->
+<!--<div class="card mb-3 rounded shadow-sm">-->
+<!--        <div class="card-body p-0">-->
+<!--            <div class="table-responsive">-->
+<!--            {% load django_tables2 %}-->
+<!--            {% render_table table %}-->
+<!--            </div>  -->
+<!--        </div>-->
+<!--</div>-->
+<!--{% endif %}-->
+
+{% endblock content %}

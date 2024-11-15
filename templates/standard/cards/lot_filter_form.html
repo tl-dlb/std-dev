@@ -1,0 +1,281 @@
+{% load static %}
+{% load i18n %}
+{% block head_css_page %}
+<link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+
+<!--<form id="search-form">-->
+<!--    <div class="row">-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text" -->
+<!--                    name="name" -->
+<!--                    id="name-input"-->
+<!--                    placeholder="Наименование"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.name.value %}-->
+<!--                    value="{{ form.name.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text" -->
+<!--                    name="number" -->
+<!--                    id="number-input"-->
+<!--                    placeholder="Номер"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.number.value %}-->
+<!--                    value="{{ form.number.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text" -->
+<!--                    name="sum" -->
+<!--                    id="sum-input"-->
+<!--                    placeholder="Сумма"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.sum.value %}-->
+<!--                    value="{{ form.sum.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    name="company"-->
+<!--                    id="company-input"-->
+<!--                    placeholder="Брокер"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.company.value %}-->
+<!--                    value="{{ form.company.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    name="client"-->
+<!--                    id="client-input"-->
+<!--                    placeholder="Заказчик"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.client.value %}-->
+<!--                    value="{{ form.client.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <select name="status" class="border-gray-300 border rounded-md bg-white text-left shadow-sm hover:cursor-pointer css-11vi78b-control" id="status-select">-->
+<!--                <option value="ALL"           {% if form.status.value == "ALL"           %}selected{% endif %}>Все статусы</option>-->
+<!--                <option value="DRAFT"         {% if form.status.value == "DRAFT"         %}selected{% endif %}>Черновик</option>-->
+<!--                <option value="PUBLISHED"     {% if form.status.value == "PUBLISHED"     %}selected{% endif %}>Опубликован</option>-->
+<!--                <option value="SUBMISSION"    {% if form.status.value == "SUBMISSION"    %}selected{% endif %}>Прием заявок</option>-->
+<!--                <option value="ADMISSION"     {% if form.status.value == "ADMISSION"     %}selected{% endif %}>Допуск участников</option>-->
+<!--                <option value="ADMITTED"      {% if form.status.value == "ADMITTED"      %}selected{% endif %}>Участники определены</option>-->
+<!--                <option value="BIDDING"       {% if form.status.value == "BIDDING"       %}selected{% endif %}>Идут торги</option>-->
+<!--                <option value="SUMMARIZING"   {% if form.status.value == "SUMMARIZING"   %}selected{% endif %}>Подведение итогов</option>-->
+<!--                <option value="COMPLETED"     {% if form.status.value == "COMPLETED"     %}selected{% endif %}>Завершен</option>-->
+<!--                <option value="NOT_COMPLETED" {% if form.status.value == "NOT_COMPLETED" %}selected{% endif %}>Не состоялся</option>-->
+<!--                <option value="CANCELLED"     {% if form.status.value == "CANCELLED"     %}selected{% endif %}>Отменен</option>-->
+<!--            </select>   -->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    id="sub-begin-input"-->
+<!--                    placeholder="Начало приема заявок"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    >-->
+<!--            <input type="hidden" name="sub_bg" id="sub-bg-input" {% if form.sub_bg.value %}value="{{ form.sub_bg.value }}"{% endif %}>-->
+<!--            <input type="hidden" name="sub_bl" id="sub-bl-input" {% if form.sub_bl.value %}value="{{ form.sub_bl.value }}"{% endif %}>-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    id="sub-end-input"-->
+<!--                    placeholder="Окончание приема заявок"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    >-->
+<!--            <input type="hidden" name="sub_eg" id="sub-eg-input" {% if form.sub_eg.value %}value="{{ form.sub_eg.value }}"{% endif %}>-->
+<!--            <input type="hidden" name="sub_el" id="sub-el-input" {% if form.sub_el.value %}value="{{ form.sub_el.value }}"{% endif %}>-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    id="bid-begin-input"-->
+<!--                    placeholder="Начало аукциона"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    >-->
+<!--            <input type="hidden" name="bid_bg" id="bid-bg-input" {% if form.bid_bg.value %}value="{{ form.bid_bg.value }}"{% endif %}>-->
+<!--            <input type="hidden" name="bid_bl" id="bid-bl-input" {% if form.bid_bl.value %}value="{{ form.bid_bl.value }}"{% endif %}>-->
+<!--        </div>-->
+<!--        {% if request.user.groups.all.0.name  == 'operator' %}-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <select name="eoz_status" class="border-gray-300 border rounded-md bg-white text-left shadow-sm hover:cursor-pointer css-11vi78b-control" id="eoz-select">-->
+<!--                <option value="ALL"           {% if form.status.value == "ALL"           %}selected{% endif %}>Все</option>-->
+<!--                <option value="NOT_SENT"      {% if form.status.value == "NOT_SENT"      %}selected{% endif %}>Не отправлено</option>-->
+<!--                <option value="PUBLISH_SENT"  {% if form.status.value == "PUBLISH_SENT"  %}selected{% endif %}>Опубликованные</option>-->
+<!--                <option value="RESULT_SENT"   {% if form.status.value == "RESULT_SENT"   %}selected{% endif %}>Результаты</option>-->
+<!--            </select>   -->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <div class="btn-group w-100" role="group">-->
+<!--                <button class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" id="submit-button"><i class="fas fa-search me-2"></i>Искать</button>-->
+<!--                <button class="btn btn-outline-secondary" id="reset-button"><i class="fas fa-times"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>     -->
+<!--</form>-->
+
+<!--<form id="search-form">-->
+<!--    <div class="row">-->
+<!--        <div class="col-lg-6 mb-3">-->
+<!--            <input  type="text"-->
+<!--                    name="search"-->
+<!--                    id="search-input"-->
+<!--                    placeholder="Поиск по всем полям"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.search.value %}-->
+<!--                    value="{{ form.search.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <div class="btn-group w-100" role="group">-->
+<!--                <button class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" id="submit-button"><i class="fas fa-search me-2"></i>Искать</button>-->
+<!--                <button class="btn btn-outline-secondary" id="reset-button"><i class="fas fa-times"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+<!--<form id="search-form">-->
+<!--<div class="max-w-screen-3xl my-4 md:ml-0">-->
+<!--    <div class="relative  text-gray-400 focus-within:text-gray-600">-->
+<!--        <div class="pointer-events-none pl-5 absolute inset-y-0 left-0 flex items-center">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 flex-shrink-0">-->
+<!--                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"></path></svg>-->
+<!--        </div>-->
+<!--        <input name="search" id="search-input" placeholder="{% trans "Поиск" %}..." type="text"-->
+<!--               class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"-->
+<!--               {% if form.search.value %}-->
+<!--                    value="{{ form.search.value }}"-->
+<!--               {% endif %}-->
+<!--        >-->
+<!--    </div>-->
+<!--</div>-->
+<!--</form>-->
+
+<form id="search-form" class="grid grid-cols-4 gap-4">
+    <div class="col-span-1">
+        <div class="relative text-gray-400 focus-within:text-gray-600">
+            <div class="pointer-events-none pl-5 absolute inset-y-0 left-0 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 flex-shrink-0">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input name="search" id="search-input" placeholder="{% trans "Поиск" %}..." type="text"
+                   class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"
+                   {% if form.search.value %}
+                        value="{{ form.search.value }}"
+                   {% endif %}
+            >
+        </div>
+    </div>
+    <div class="col-span-1">
+            <input  type="text"
+                    name="company"
+                    id="company-input"
+                    placeholder="Брокер"
+                    class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"{% if form.company.value %}
+                    value="{{ form.company.value }}"
+                    {% endif %}
+                    >
+    </div>
+    <div class="col-span-1">
+            <input  type="text"
+                    name="client"
+                    id="client-input"
+                    placeholder="Заказчик"
+                    class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"{% if form.client.value %}
+                    value="{{ form.client.value }}"
+                    {% endif %}
+                    >
+        </div>
+    <div class="col-span-1">
+
+        <div class="ml-4 flex-1">
+
+            <select name="status" id="status-select" class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block">
+                <option value="ALL"           {% if form.status.value == "ALL"           %}selected{% endif %}>Все статусы</option>
+                <option value="DRAFT"         {% if form.status.value == "DRAFT"         %}selected{% endif %}>Черновик</option>
+                <option value="PUBLISHED"     {% if form.status.value == "PUBLISHED"     %}selected{% endif %}>Опубликован</option>
+                <option value="SUBMISSION"    {% if form.status.value == "SUBMISSION"    %}selected{% endif %}>Прием заявок</option>
+                <option value="ADMISSION"     {% if form.status.value == "ADMISSION"     %}selected{% endif %}>Допуск участников</option>
+                <option value="ADMITTED"      {% if form.status.value == "ADMITTED"      %}selected{% endif %}>Участники определены</option>
+                <option value="BIDDING"       {% if form.status.value == "BIDDING"       %}selected{% endif %}>Идут торги</option>
+                <option value="SUMMARIZING"   {% if form.status.value == "SUMMARIZING"   %}selected{% endif %}>Подведение итогов</option>
+                <option value="COMPLETED"     {% if form.status.value == "COMPLETED"     %}selected{% endif %}>Завершен</option>
+                <option value="NOT_COMPLETED" {% if form.status.value == "NOT_COMPLETED" %}selected{% endif %}>Не состоялся</option>
+                <option value="CANCELLED"     {% if form.status.value == "CANCELLED"     %}selected{% endif %}>Отменен</option>
+
+            </select>
+        </div>
+
+    </div>
+    <div class="col-span-1">
+
+        <div class="flex-1">
+        <input type="text" id="bid-begin-input" placeholder="Начало аукциона" class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block">
+        <input type="hidden" name="bid_bg" id="bid-bg-input" {% if form.bid_bg.value %}value="{{ form.bid_bg.value }}"{% endif %}>
+        <input type="hidden" name="bid_bl" id="bid-bl-input" {% if form.bid_bl.value %}value="{{ form.bid_bl.value }}"{% endif %}>
+
+        </div>
+    </div>
+    <div class="col-span-1">
+
+        <div class="ml-4 flex-1">
+        <input type="text" id="sub-begin-input" placeholder="Начало приема заявок" class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block">
+        <input type="hidden" name="sub_bg" id="sub-bg-input" {% if form.sub_bg.value %}value="{{ form.sub_bg.value }}"{% endif %}>
+        <input type="hidden" name="sub_bl" id="sub-bl-input" {% if form.sub_bl.value %}value="{{ form.sub_bl.value }}"{% endif %}>
+        </div>
+    </div>
+    <div class="col-span-1">
+        <div class="ml-4 flex-1">
+        <input type="text" id="sub-end-input" placeholder="Окончание приема заявок" class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block">
+        <input type="hidden" name="sub_eg" id="sub-eg-input" {% if form.sub_eg.value %}value="{{ form.sub_eg.value }}"{% endif %}>
+        <input type="hidden" name="sub_el" id="sub-el-input" {% if form.sub_el.value %}value="{{ form.sub_el.value }}"{% endif %}>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('#bid-begin-input', {
+            locale: 'ru',
+            dateFormat: 'd.m.Y',
+            onClose: function (selectedDates, dateStr, instance) {
+                form.submit();
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('#sub-begin-input', {
+            locale: 'ru',
+            dateFormat: 'd.m.Y',
+            onClose: function (selectedDates, dateStr, instance) {
+                form.submit();
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('#sub-end-input', {
+            locale: 'ru',
+            dateFormat: 'd.m.Y',
+            onClose: function (selectedDates, dateStr, instance) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+{% block footer_javascript_page %}
+<script src="{% static 'js/libs/flatpickr/flatpickr.js' %}"></script>
+<script src="{% static 'js/libs/flatpickr/ru.js' %}"></script>
+<script src="{% static 'js/app/lot-filter.js' %}"></script>
+{% endblock footer_javascript_page %}

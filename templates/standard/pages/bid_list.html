@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load variables %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block title %}{% trans "Ход торгов" %} {{ lot.number }}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Ход торгов" %}</h1>
+            </div>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+            <a class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100" href="{% url 'lot_detail' lot.uuid %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5">
+                    <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"></path>
+                </svg><span class="whitespace-nowrap">{% trans "Назад" %}</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+{% if lot.status == 'BIDDING' %}
+<div class="row">
+    {% if user_app %}<div class="col-3">{% else %}<div class="col-4">{% endif %}
+        {% include "standard/cards/lot_detail_view_bidding.html" with lot=lot %}
+    </div>
+
+    {% if user_app %}<div class="col-6">{% else %}<div class="col-8">{% endif %}
+        {% include "standard/cards/bid_list_view.html" %}
+    </div>
+
+    {% if user_app %}
+    <div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Подать ценовое предложение" %}</h3>
+        <form class="space-y-8 divide-y divide-gray-200" id="bid-form" action="{% url 'lot_bid_create' lot.uuid %}" method="post">
+                        {% csrf_token %}
+                        {% include 'bs4_form.html' with form=form %}
+<!--            <div class="pt-5">-->
+<!--                <div class="g-recaptcha" data-sitekey={{ public_key }} ></div>-->
+<!--            </div>-->
+        <div class="pt-5"><div class="flex justify-end"><button id="bid-submit" type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg><span class="whitespace-nowrap">{% trans "Подтвердить" %}</span></button></div></div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-4">{% include "standard/cards/lot_detail_view_bidding.html" with lot=lot %}</div>
+    <div class="col-8">{% include "standard/cards/bid_list_view.html" with visible=visible %}</div>
+</div>
+{% endif %}
+
+{% endblock content %}
+
+{% block footer_javascript_page %}
+<!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
+<script src="{% static 'js/libs/react/react.development.js' %}"></script>
+<script src="{% static 'js/libs/react/react-dom.development.js' %}"></script>
+<script src="{% static 'js/libs/babel.min.js' %}"></script>
+<script src="{% static 'js/app/bid-table-component.js' %}" type="text/babel"></script>
+<script type="text/babel">
+var BidsTableRendered = ReactDOM.render(
+    <BidsTable  host={window.location.host} 
+                lotId='{{ lot.id }}' 
+                visible={'{{ visible }}'}/>,
+    document.getElementById('bid-table')
+);
+</script>
+
+{% if lot.status == 'BIDDING' %}
+
+<script src="{% static 'js/app/countdown-component.js' %}" type="text/babel"></script>
+<script type="text/babel">
+var CountdownRendered = ReactDOM.render(
+    <Countdown  host={ window.location.host } 
+                lotId='{{ lot.id }}'
+                biddingBegin='{{ lot.bidding_begin|date:"U" }}'
+                biddingEnd='{{ lot.bidding_end|date:"U" }}' />,
+    document.getElementById('countdown')
+);
+</script>
+
+<script src="{% static 'js/libs/autonumeric.js' %}"></script>
+<script>
+/*websocket*/
+wsProtocol = window.location.protocol == 'https:' ? 'wss://' : 'ws://';
+const webSocket = new WebSocket(wsProtocol + window.location.host + '/ws/standard/');
+webSocket.onmessage = function(e) { 
+    console.log("onmessage...");
+    BidsTableRendered.fetchData();
+    CountdownRendered.fetchData();
+};
+webSocket.onclose = function(e) { 
+    console.error('socket closed unexpectedly...'); 
+};
+webSocket.onopen = function(e) { 
+    //webSocket.send(JSON.stringify({'message': 'reloaded'}));
+};
+
+/*form autonumeric*/
+{% if user_app %}
+const options = {
+    decimalCharacter: ',', 
+    digitGroupSeparator: ' ', 
+    minimumValue: 0,
+    modifyValueOnWheel: false,
+}
+const sum = new AutoNumeric('#sum-input', options);
+const bidForm = document.querySelector('#bid-form');
+const bidSubmit = document.querySelector('#bid-submit');
+const sumInput = document.querySelector('#sum-input');
+bidSubmit.onclick = function(e) {
+    sumInput.value = sum.rawValue;
+    bidForm.submit();
+};
+sumInput.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    sumInput.value = sum.rawValue;
+    bidForm.submit();
+  }
+});
+{% endif %}
+</script>
+
+{% endif %}
+
+{% endblock footer_javascript_page %}
+

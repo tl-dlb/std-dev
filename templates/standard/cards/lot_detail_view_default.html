@@ -1,0 +1,150 @@
+{% load humanize %}
+{% load variables %}
+{% load i18n %}
+
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Лот" %} {{ lot.number }}</h3>
+            <span class="mt-1 text-sm text-gray-900 font-light sm:col-span-2 sm:mt-0">{{ lot.get_type_display }}</span>
+        </div>
+
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+
+
+{% if lot.company == user.profile.company or user.groups.all.0.name  == 'operator' or user.is_staff  %}
+
+    {% if lot.status in 'DRAFT,PUBLISHED,SUBMISSION' and perms.standard.change_lot %}
+        <a href="{% url 'lot_edit' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" >Редактировать</a>
+    {% endif %}
+
+    {% if lot.company == user.profile.company and lot.status == 'DRAFT' and perms.standard.delete_lot %}
+    <a href="{% url 'lot_delete' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" onclick="return confirm('Вы уверены?');">Удалить</a>
+    {% endif %}
+
+    {% if lot.status == 'DRAFT' and perms.standard.change_lot %}
+    <a href="{% url 'lot_publish' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Опубликовать</a>
+    {% endif %}
+
+    {% if lot.status == 'ADMISSION' and perms.standard.change_lot %}
+        {% if not lot.subsoil and user.groups.all.0.name  == 'operator' %}
+        <a href="{% url 'lot_admit' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Опубликовать участников</a>
+        {% elif  lot.subsoil and lot.company == user.profile.company %}
+        <a href="{% url 'lot_admit' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Опубликовать участников</a>
+        {% endif %}
+    {% endif %}
+
+    {% if lot.status == 'SUMMARIZING' %}
+        {% if lot.result %}
+            {% if lot.result.signature %}
+                {% if perms.standard.change_lot %}
+                <a href="{% url 'lot_summarize' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Опубликовать итоги</a>
+                {% endif %}
+            {% else %}
+                {% if perms.signature.add_signature and user.groups.all.0.name  == 'operator' %}
+                <a href="{% url 'lot_signature_create' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Подписать итоги</a>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if perms.standard.add_result and user.groups.all.0.name  == 'operator' %}
+            <a href="{% url 'lot_result_create' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Сформировать итоги</a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {% if user.groups.all.0.name  == 'operator' and lot.status in 'PUBLISHED,SUBMISSION,ADMISSION,ADMITTED' and perms.standard.change_lot %}
+    <a href="{% url 'lot_cancel' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Отменить</a>
+    {% endif %}
+
+    {% if lot.status == 'COMPLETED' and perms.standard.change_lot %}
+    <a href="{% url 'lot_revoke' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Аннулировать</a>
+    {% endif %}
+
+{% else %}
+
+    {% if lot.status == 'SUBMISSION'%}
+        {% if apps.count == 0 %}
+            {% if perms.standard.add_application %}
+            <a href="{% url 'lot_application_create' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Подать заявку</a>
+            {% endif %}
+        {% else %}
+            {% if perms.standard.delete_application %}
+            <a href="{% url 'lot_application_delete' lot.uuid apps.first.pk %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" onclick="return confirm('Вы уверены?');">Отозвать заявку</a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+{% endif %}
+{% if lot.status in 'BIDDING,SUMMARIZING,COMPLETED,NOT_COMPLETED,REVOKED' and perms.standard.view_bid %}
+    {% if visible or admission %}
+            <form method="post" class="flex">
+                {% csrf_token %}
+                <div class="g-recaptcha"  data-sitekey="{{ public_key }}"></div>
+                <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Перейти к ходу торгов</button>
+            </form>
+        {% endif %}
+{% endif %}
+
+        </div>
+        <div class="mt-3 border-t border-gray-100">
+            <dl class="grid grid-rows-5 grid-flow-col gap-1">
+                <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% trans "Наименование" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.name }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Брокер-инициатор" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.company.name }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Заказчик" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.client.name }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Статус" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.get_status_display }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Стартовая сумма" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.sum|intcomma }} тенге, {% if lot.vat %}с НДС{% else %}без НДС{% endif %}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Начало приема заявки" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.submission_begin }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Окончание приема заявок" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.submission_end }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Начало аукциона" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.bidding_begin }}</dd>
+                </div>
+
+                {% if lot.changed_event_comment %}
+                <div class="py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Причина внесения изменений" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.changed_event_comment }}</dd>
+                </div>
+                {% endif %}
+                {% if lot.cancelled_event_comment %}
+                <div class="py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Причина отмены" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.cancelled_event_comment }}</dd>
+                </div>
+                {% endif %}
+                {% if lot.revoked_event_comment %}
+                <div class="py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Причина аннулирования" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.revoked_event_comment }}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+    {% if lot.qualification or lot.subsoil or lot.guarantee %}
+    <div class="py-3 mt-4 border-t border-gray-100 flex justify-end">
+        {% if lot.qualification %}<dt class="text-gray-500 text-sm font-semibold">{% trans "ПКО" %}</dt>{% endif %}
+        <dd class="mx-4 text-sm"></dd>
+        {% if lot.subsoil %}<dt class="text-gray-500 text-sm font-semibold">{% trans "В целях недропользования" %}</dt>{% endif %}
+        <dd class="mx-4 text-sm"></dd>
+        {% if lot.guarantee %}<dt class="text-gray-500 text-sm font-semibold">{% trans "Гарантийное обеспечение" %} {{ lot.guarantee_amount }}% ({{ lot.guarantee_amount_sum|intcomma }} тенге)</dt>{% endif %}
+    </div>
+    {% endif %}
+
+
+
+
+</div>

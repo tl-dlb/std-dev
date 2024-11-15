@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load variables %}
+{% load i18n %}
+{% block title %}{% trans "Отклонить заявку" %}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Отклонить заявку" %}</h1>
+            </div>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+            <a class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100" href="{% url 'lot_detail' lot.uuid %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5">
+                    <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"></path>
+                </svg><span class="whitespace-nowrap">{% trans "Назад" %}</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+
+<div class="card mb-3 rounded shadow-sm">
+    <div class="card-body">
+        <h6 class="card-title fw-bold mb-2">{% trans "Отклонить заявку" %}</h6>
+        <div class="row">
+            <div class="col-lg-6 mb-2">
+                <div class="text-label">{% trans "Брокер" %}</div>
+                <div class="text-lead">{{ application.company.name }}</div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-lg-6 mb-2">
+                <div class="text-label">{% trans "Участник" %}</div>
+                <div class="text-lead">{{ application.client.name }}</div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-lg-6 mb-2">
+                <div class="text-label">{% trans "БИН участника" %}</div>
+                <div class="text-lead">{{ application.client.idn }}</div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-lg-6 mb-2">
+                <form action="{% url 'lot_application_reject' lot.uuid application.pk %}" method="post">
+                    {% csrf_token %}
+                    {% include 'bs4_form.html' with form=form %}
+                    <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">{% trans "Подтвердить" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

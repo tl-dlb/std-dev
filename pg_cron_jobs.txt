@@ -1,0 +1,24 @@
+1.
+UPDATE standard.standard_lot
+SET status='SUBMISSION'
+WHERE status='PUBLISHED' AND NOW() > submission_begin
+
+2.
+UPDATE standard.standard_lot
+SET status='ADMISSION'
+WHERE status='SUBMISSION' AND NOW() > submission_end
+
+3.
+UPDATE standard.standard_lot
+SET status='BIDDING'
+WHERE status='ADMITTED' AND NOW() > bidding_begin
+
+4.
+UPDATE standard.standard_lot
+SET status='SUMMARIZING'
+WHERE status='BIDDING' AND NOW() > bidding_end
+
+5.
+UPDATE standard.standard_lot
+SET status='SUMMARIZING'
+WHERE status='ADMISSION' AND NOW() > bidding_begin

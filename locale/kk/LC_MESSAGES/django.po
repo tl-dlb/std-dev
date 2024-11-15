@@ -1,0 +1,1370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 05:57+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: .\authentication\forms.py:38
+msgid "Содержимое подписи"
+msgstr "Қолтаңба мазмұны"
+
+#: .\authentication\models.py:11
+msgid "Пользователь"
+msgstr "Пайдаланушы"
+
+#: .\authentication\models.py:12
+msgid "ЭЦП"
+msgstr "ЭСҚ"
+
+#: .\authentication\models.py:14 .\company\models.py:29
+#: .\templates\standard\cards\bid_list_view.html:17
+msgid "Компания"
+msgstr "Компания"
+
+#: .\authentication\models.py:17 .\templates\base.html:76
+#: .\templates\registration\profile.html:4
+msgid "Профиль"
+msgstr "Профиль"
+
+#: .\authentication\models.py:18
+msgid "Профили"
+msgstr "Профильдер"
+
+#: .\authentication\models.py:32 .\templates\registration\signature.html:4
+msgid "Вход"
+msgstr "Кіру"
+
+#: .\authentication\models.py:33
+msgid "Выход"
+msgstr "Шығу"
+
+#: .\authentication\models.py:34
+msgid "IP адрес"
+msgstr "IP мекенжайы"
+
+#: .\authentication\views.py:35
+msgid "Аккаунт создан."
+msgstr "Тіркелгі жасалды."
+
+#: .\authentication\views.py:119
+msgid ""
+"Вы не зарегистированы в клиринге. Зарегистируйтесь в клиринге и попробуйтее "
+"еще раз."
+msgstr "Сіз клирингте тіркелмегенсіз. Клирингке тіркеліп көріңізтағы бір рет."
+
+#: .\authentication\views.py:121
+msgid "Компания создана."
+msgstr "Компания құрылды."
+
+#: .\company\enums.py:4 .\standard\enums.py:37
+msgid "На рассмотрении"
+msgstr "Қарастырылуда"
+
+#: .\company\enums.py:5
+msgid "Активен"
+msgstr "Белсенді"
+
+#: .\company\enums.py:6
+msgid "Заблокирован"
+msgstr "Бұғатталған"
+
+#: .\company\enums.py:7 .\standard\enums.py:23
+msgid "Удален"
+msgstr "Жойылды"
+
+#: .\company\enums.py:11 .\company\enums.py:18 .\standard\models.py:119
+#: .\templates\standard\columns\app_client.html:7
+#: .\templates\standard\pages\application_reject.html:40
+#: .\templates\standard\reports\admission.html:70
+msgid "Участник"
+msgstr "Қатысушы"
+
+#: .\company\enums.py:12 .\company\enums.py:19 .\standard\forms.py:32
+#: .\standard\models.py:36
+#: .\templates\standard\cards\lot_detail_view_bidding.html:22
+#: .\templates\standard\cards\lot_detail_view_default.html:96
+msgid "Заказчик"
+msgstr "Тұтынушы"
+
+#: .\company\enums.py:13 .\standard\models.py:35 .\standard\models.py:118
+#: .\standard\models.py:158
+#: .\templates\standard\pages\application_reject.html:34
+#: .\templates\standard\reports\admission.html:69
+#: .\templates\standard\reports\progress.html:38
+msgid "Брокер"
+msgstr "Брокер"
+
+#: .\company\enums.py:14
+msgid "Оператор"
+msgstr "Оператор"
+
+#: .\company\forms.py:12 .\templates\standard\reports\result.html:53
+#: .\templates\standard\reports\result.html:104
+#: .\templates\standard\reports\result.html:129
+msgid "БИН/Прочее"
+msgstr "БСН/Басқа"
+
+#: .\company\models.py:12 .\standard\models.py:23 .\standard\models.py:91
+#: .\templates\company\pages\client_detail.html:39
+#: .\templates\company\pages\company_profile.html:17
+#: .\templates\registration\profile.html:29
+#: .\templates\standard\cards\lot_detail_view_bidding.html:13
+#: .\templates\standard\cards\lot_detail_view_default.html:90
+#: .\templates\standard\reports\admission.html:34
+#: .\templates\standard\reports\result.html:47
+#: .\templates\standard\reports\result.html:128
+msgid "Наименование"
+msgstr "Аты"
+
+#: .\company\models.py:13 .\standard\fields.py:8
+msgid "БИН/ИИН"
+msgstr "БСН/ЖСН"
+
+#: .\company\models.py:14 .\sign\models.py:8 .\standard\forms.py:130
+#: .\templates\company\pages\client_detail.html:47
+#: .\templates\company\pages\company_profile.html:25
+#: .\templates\registration\profile.html:37
+msgid "Тип"
+msgstr "Түр"
+
+#: .\company\models.py:15 .\sign\models.py:9 .\standard\models.py:19
+#: .\standard\models.py:86 .\standard\models.py:117 .\standard\models.py:156
+#: .\standard\models.py:179 .\templates\company\pages\client_detail.html:51
+#: .\templates\company\pages\company_profile.html:29
+#: .\templates\registration\profile.html:41
+#: .\templates\standard\cards\lot_detail_view_bidding.html:19
+#: .\templates\standard\cards\lot_detail_view_default.html:99
+#: .\templates\standard\reports\admission.html:72
+#: .\templates\standard\reports\result.html:108
+msgid "Статус"
+msgstr "Күй"
+
+#: .\company\models.py:16 .\templates\company\pages\client_detail.html:56
+#: .\templates\company\pages\company_profile.html:34
+#: .\templates\registration\profile.html:46
+msgid "Адрес"
+msgstr "Мекенжай"
+
+#: .\company\models.py:17 .\templates\company\pages\client_detail.html:62
+#: .\templates\company\pages\company_profile.html:40
+#: .\templates\registration\profile.html:52
+msgid "E-mail"
+msgstr "E-mail"
+
+#: .\company\models.py:18
+msgid "Телефоны"
+msgstr "Телефондар"
+
+#: .\company\models.py:19 .\templates\company\pages\client_detail.html:74
+#: .\templates\company\pages\company_profile.html:52
+#: .\templates\registration\profile.html:64
+msgid "Банковские реквизиты"
+msgstr "Банк деректемелері"
+
+#: .\company\models.py:20 .\templates\standard\reports\result.html:105
+#: .\templates\standard\reports\result.html:130
+msgid "Биржевой идентификатор"
+msgstr "Биржалық идентификатор"
+
+#: .\company\models.py:30
+msgid "Компании"
+msgstr "Компаниялар"
+
+#: .\company\tables.py:10
+msgid "Клиенты не найдены"
+msgstr "Клиенттер табылмады"
+
+#: .\company\tables.py:17
+msgid "Свободное ГО"
+msgstr "Тегін МО"
+
+#: .\company\tables.py:23
+msgid "Заблокированное ГО"
+msgstr "Бұғатталған МО"
+
+#: .\company\tables.py:34
+msgid "Брокеры не найдены"
+msgstr "Брокерлер табылмады"
+
+#: .\company\views.py:61
+msgid ""
+"Клиент не зарегистирован в клиринге. Зарегистируйтесь в клиринге и "
+"попробуйтее еще раз."
+msgstr ""
+"Клиент клирингте тіркелмеген. Клирингке тіркеліңіз және қайталап көріңіз."
+
+#: .\company\views.py:64
+msgid ""
+"Компания создана и добавлена к вашему списку клиентов. Ожидается "
+"подтверждение."
+msgstr ""
+"Компания құрылды және сіздің клиенттер тізіміне қосылды. Күтілуде растау."
+
+#: .\company\views.py:73
+msgid ""
+"Компания с таким БИН/ИИН добавлена к вашему списку клиентов из существующей "
+"базы данных."
+msgstr ""
+"Осындай БСН/ЖСН бар Компания сіздің бар клиенттер тізіміңізге қосылды "
+"мәліметтер базасы."
+
+#: .\company\views.py:77
+msgid "Компания с таким БИН/ИИН уже была добавлена к вашему списку клиентов."
+msgstr "Осындай БСН/ЖСН бар Компания сіздің клиенттер тізіміне қосылды."
+
+#: .\company\views.py:112 .\standard\views\lot.py:143
+#: .\standard\views\position.py:101
+msgid "Изменения сохранены."
+msgstr "Өзгерістер сақталды."
+
+#: .\company\views.py:135
+msgid "Клиент активирован."
+msgstr "Клиент іске қосылды."
+
+#: .\sign\models.py:10
+msgid "Данные"
+msgstr "Деректер"
+
+#: .\sign\models.py:16 .\standard\forms.py:204
+#: .\templates\standard\reports\admission.html:95
+#: .\templates\standard\reports\admission.html:96
+#: .\templates\standard\reports\admission.html:97
+msgid "Подпись"
+msgstr "Қолы"
+
+#: .\sign\models.py:17
+msgid "Подписи"
+msgstr "Қолтаңбалар"
+
+#: .\standard\enums.py:4
+msgid "Стандартный аукцион"
+msgstr "Стандартты аукцион"
+
+#: .\standard\enums.py:8 .\standard\models.py:52
+#: .\templates\standard\cards\lot_detail_view_bidding.html:7
+#: .\templates\standard\cards\lot_detail_view_default.html:9
+#: .\templates\standard\pages\lot_detail.html:3
+#: .\templates\standard\pages\lot_list.html:15
+msgid "Лот"
+msgstr "Лот"
+
+#: .\standard\enums.py:12
+msgid "Черновик"
+msgstr "Жоба"
+
+#: .\standard\enums.py:13
+msgid "Опубликован"
+msgstr "Жарияланды"
+
+#: .\standard\enums.py:14
+msgid "Прием заявок"
+msgstr "Өтінімдерді қабылдау"
+
+#: .\standard\enums.py:15
+msgid "Допуск участников"
+msgstr "Қатысушыларды қабылдау"
+
+#: .\standard\enums.py:16
+msgid "Участники определены"
+msgstr "Қатысушылар анықталды"
+
+#: .\standard\enums.py:17
+msgid "Идут торги"
+msgstr "Сауда-саттық жүріп жатыр"
+
+#: .\standard\enums.py:18
+msgid "Подведение итогов"
+msgstr "Қорытындылау"
+
+#: .\standard\enums.py:19
+msgid "Завершен"
+msgstr "Аяқталды"
+
+#: .\standard\enums.py:20
+msgid "Не состоялся"
+msgstr "Болған жоқ"
+
+#: .\standard\enums.py:21 .\standard\enums.py:50
+msgid "Отменен"
+msgstr "Жойылды"
+
+#: .\standard\enums.py:22
+msgid "Аннулирован"
+msgstr "Жойылды"
+
+#: .\standard\enums.py:27
+msgid "На понижение"
+msgstr "Төмендетуге"
+
+#: .\standard\enums.py:28
+msgid "На повышение"
+msgstr "Көтеру үшін"
+
+#: .\standard\enums.py:32
+msgid "Активна"
+msgstr "Белсенді"
+
+#: .\standard\enums.py:33
+msgid "Удалена"
+msgstr "Жойылды"
+
+#: .\standard\enums.py:38
+msgid "Отозвана"
+msgstr "Қайтарып алынды"
+
+#: .\standard\enums.py:39
+msgid "Допущена"
+msgstr "Рұқсат етілген"
+
+#: .\standard\enums.py:40
+msgid "Отклонена"
+msgstr "Қабылданбады"
+
+#: .\standard\enums.py:44
+msgid "Не произведен допуск участников"
+msgstr "Қатысушыларға рұқсат берілмеді"
+
+#: .\standard\enums.py:45 .\standard\tables.py:26
+msgid "Заявки на участие не поданы"
+msgstr "Қатысуға өтінімдер берілмеген"
+
+#: .\standard\enums.py:46
+msgid "Допущена только одна заявка на участие"
+msgstr "Қатысуға бір ғана өтінім жіберілді"
+
+#: .\standard\enums.py:47
+msgid "Ценовые предложения не поданы"
+msgstr "Баға ұсыныстары берілмеген"
+
+#: .\standard\enums.py:48
+msgid "Подано только одно ценовое предложение"
+msgstr "Тек бір баға ұсынысы ұсынылды"
+
+#: .\standard\enums.py:49
+msgid "Выявлен победитель"
+msgstr "Жеңімпаз анықталды"
+
+#: .\standard\enums.py:54
+msgid "Комплект, штука"
+msgstr "Жинақ, дана"
+
+#: .\standard\enums.py:55
+msgid "Единица"
+msgstr "Бірлік"
+
+#: .\standard\enums.py:56
+msgid "Штука"
+msgstr "Дана"
+
+#: .\standard\enums.py:57
+msgid "Тонна"
+msgstr "Тонна"
+
+#: .\standard\enums.py:58
+msgid "Согласно заявке"
+msgstr "Өтінімге сәйкес"
+
+#: .\standard\enums.py:59
+msgid "Литр"
+msgstr "Литр"
+
+#: .\standard\enums.py:60
+msgid "Киллограм"
+msgstr "Киллограм"
+
+#: .\standard\enums.py:61
+msgid "Метр"
+msgstr "Метр"
+
+#: .\standard\enums.py:65
+msgid "Не отправлено"
+msgstr "Жіберілген жоқ"
+
+#: .\standard\enums.py:66 .\standard\views\lot.py:427
+msgid "Отправлено: Опубликовано"
+msgstr "Жіберілді: Жарияланды"
+
+#: .\standard\enums.py:67 .\standard\views\lot.py:431
+msgid "Отправлено: Результат"
+msgstr "Жіберілген: Нәтиже"
+
+#: .\standard\fields.py:7
+msgid "отсутствует"
+msgstr "жоқ"
+
+#: .\standard\fields.py:9
+msgid "Баланс"
+msgstr "Баланс"
+
+#: .\standard\forms.py:33
+#: .\templates\standard\cards\lot_detail_view_default.html:117
+msgid "Причина внесения изменений"
+msgstr "Өзгерістер енгізу себебі"
+
+#: .\standard\forms.py:60
+msgid "Начало приема заявок не может быть в прошлом"
+msgstr "Өтінімдерді қабылдауды бастау бұрын болуы мүмкін емес"
+
+#: .\standard\forms.py:66
+msgid "Окончание приема заявок не может быть в прошлом"
+msgstr "Өтінімдерді қабылдаудың аяқталуы өткен болуы мүмкін емес"
+
+#: .\standard\forms.py:72
+msgid "Начало аукциона не может быть в прошлом"
+msgstr "Аукционның басталуы өткен болуы мүмкін емес"
+
+#: .\standard\forms.py:79
+msgid "Размер гарантийного обеспечения не может быть равен нулю"
+msgstr "Кепілдік мөлшері нөлге тең болуы мүмкін емес"
+
+#: .\standard\forms.py:90
+msgid ""
+"Начало приема заявок не может быть равно или раньше окончания приема заявок"
+msgstr ""
+"Өтінімдерді қабылдаудың басталуы өтінімдерді қабылдаудың аяқталуына тең "
+"немесе ертерек болуы мүмкін емес"
+
+#: .\standard\forms.py:97
+msgid "Окончание приема заявок не может быть равно или раньше начала аукциона"
+msgstr ""
+"өтінімдерді қабылдаудың аяқталуы аукцион басталғанға тең немесе ертерек "
+"болуы мүмкін емес"
+
+#: .\standard\forms.py:113 .\standard\models.py:26
+msgid "НДС"
+msgstr "ҚҚС"
+
+#: .\standard\forms.py:118 .\standard\forms.py:124
+msgid "Значение не может быть меньше или равно нулю"
+msgstr "Мән нөлден кем немесе оған тең болуы мүмкін емес"
+
+#: .\standard\forms.py:131
+msgid "Файл"
+msgstr "Файл"
+
+#: .\standard\forms.py:136
+msgid "Причина"
+msgstr "Себебі"
+
+#: .\standard\forms.py:141
+msgid "Использовать гарантийное обеспечение клиента"
+msgstr "Клиенттің кепілдік кепілдігін пайдаланыңыз"
+
+#: .\standard\forms.py:145 .\standard\models.py:159
+#: .\templates\company\pages\client_detail.html:14
+msgid "Клиент"
+msgstr "Клиент"
+
+#: .\standard\forms.py:150
+msgid "Прикрепить архивный файл (необязательно)"
+msgstr "Мұрағат файлын тіркеу (міндетті емес)"
+
+#: .\standard\forms.py:165
+msgid "У клиента отсутствует счет в клиринговом центре."
+msgstr "Клиенттің клирингтік орталықта шоты жоқ."
+
+#: .\standard\forms.py:170
+msgid "У клиента отсутствуют средства на счету гарантийного обеспечения."
+msgstr "Клиенттің кепілдік беру шотында қаражаты жоқ."
+
+#: .\standard\forms.py:172
+msgid ""
+"У клиента отсутствуют средства для участия на счету гарантийного обеспечения."
+msgstr "Клиенттің кепілдік қамтамасыз ету шотына қатысу үшін қаражаты жоқ."
+
+#: .\standard\forms.py:179
+msgid "У вашей компании отсутствует счет в клиринговом центре."
+msgstr "Сіздің компанияңыздың клирингтік орталықта шоты жоқ."
+
+#: .\standard\forms.py:184
+msgid ""
+"У вашей компании отсутствуют средства на счету гарантийного обеспечения."
+msgstr "Сіздің компанияңызда кепілдік шотында қаражат жоқ."
+
+#: .\standard\forms.py:186
+msgid ""
+"У вашей компании отсутствуют средства для участия на счету гарантийного "
+"обеспечения."
+msgstr ""
+"Сіздің компанияңызда кепілдік шотына қатысу үшін қаражат жоқ қамтамасыз ету."
+
+#: .\standard\forms.py:195
+msgid "Значение не может быть равно нулю"
+msgstr "Мән нөлге тең болуы мүмкін емес"
+
+#: .\standard\forms.py:208 .\templates\standard\reports\progress.html:29
+#: .\templates\standard\reports\result.html:29
+msgid "Дата отчета"
+msgstr "Есеп беру күні"
+
+#: .\standard\models.py:18
+msgid "Номер"
+msgstr "Нөмірі"
+
+#: .\standard\models.py:20
+msgid "Тип аукциона"
+msgstr "Аукцион түрі"
+
+#: .\standard\models.py:24
+msgid "Дополнительная информация"
+msgstr "Қосымша ақпарат"
+
+#: .\standard\models.py:25 .\standard\models.py:97
+#: .\templates\standard\cards\bid_list_view.html:16
+#: .\templates\standard\cards\bid_list_view.html:20
+#: .\templates\standard\reports\admission.html:41
+msgid "Сумма"
+msgstr "Сомасы"
+
+#: .\standard\models.py:27
+#: .\templates\standard\cards\lot_detail_view_default.html:138
+msgid "ПКО"
+msgstr "ПКО"
+
+#: .\standard\models.py:28
+#: .\templates\standard\cards\lot_detail_view_default.html:140
+#: .\templates\standard\reports\result.html:66
+msgid "В целях недропользования"
+msgstr "Жер қойнауын пайдалану мақсатында"
+
+#: .\standard\models.py:29
+#: .\templates\standard\cards\lot_detail_view_default.html:142
+msgid "Гарантийное обеспечение"
+msgstr "Кепілдік қамтамасыз ету"
+
+#: .\standard\models.py:33
+msgid "Размер гарантийного обеспечения (%)"
+msgstr "Кепілдік қамтамасыз ету мөлшері (%)"
+
+#: .\standard\models.py:41
+msgid "Начало приема заявок"
+msgstr "Өтінімдерді қабылдауды бастау"
+
+#: .\standard\models.py:42
+#: .\templates\standard\cards\lot_detail_view_default.html:108
+msgid "Окончание приема заявок"
+msgstr "Өтінімдерді қабылдаудың аяқталуы"
+
+#: .\standard\models.py:43
+#: .\templates\standard\cards\lot_detail_view_default.html:111
+msgid "Начало аукциона"
+msgstr "Аукционның басталуы"
+
+#: .\standard\models.py:44
+msgid "Окончание аукциона"
+msgstr "Аукционның аяқталуы"
+
+#: .\standard\models.py:46
+msgid "Статус ЕОЗ"
+msgstr "ЕОЗ мәртебесі"
+
+#: .\standard\models.py:53
+msgid "Лоты"
+msgstr "Лоттар"
+
+#: .\standard\models.py:87 .\templates\standard\reports\admission.html:38
+#: .\templates\standard\reports\result.html:94
+msgid "Единица измерения"
+msgstr "Өлшем бірлігі"
+
+#: .\standard\models.py:88
+#: .\templates\standard\cards\position_detail_view.html:44
+msgid "Код номенклатуры"
+msgstr "Номенклатура коды"
+
+#: .\standard\models.py:89
+#: .\templates\standard\cards\position_detail_view.html:49
+#: .\templates\standard\reports\admission.html:36
+msgid "Код ТНВЭД"
+msgstr "СЭҚ ТН коды"
+
+#: .\standard\models.py:90
+#: .\templates\standard\cards\position_detail_view.html:54
+#: .\templates\standard\reports\admission.html:37
+msgid "Код ЕНС ТРУ"
+msgstr "ЕНС ТРУ коды"
+
+#: .\standard\models.py:92 .\templates\standard\reports\admission.html:42
+msgid "Условия оплаты"
+msgstr "Төлем шарттары"
+
+#: .\standard\models.py:93 .\templates\standard\reports\admission.html:44
+msgid "Условия поставки"
+msgstr "Жеткізу шарттары"
+
+#: .\standard\models.py:94 .\templates\standard\reports\admission.html:43
+#: .\templates\standard\reports\result.html:81
+msgid "Срок поставки"
+msgstr "Жеткізу мерзімі"
+
+#: .\standard\models.py:95 .\templates\standard\reports\admission.html:40
+#: .\templates\standard\reports\result.html:149
+msgid "Цена за единицу"
+msgstr "Бірлік бағасы"
+
+#: .\standard\models.py:96 .\templates\standard\reports\admission.html:39
+msgid "Количество"
+msgstr "Саны"
+
+#: .\standard\models.py:104
+#: .\templates\standard\cards\position_detail_view.html:9
+#: .\templates\standard\reports\admission.html:30
+msgid "Позиция"
+msgstr "Позиция"
+
+#: .\standard\models.py:105
+msgid "Позиции"
+msgstr "Позициялар"
+
+#: .\standard\models.py:122 .\standard\models.py:162
+#: .\templates\standard\cards\bid_list_view.html:15
+#: .\templates\standard\cards\bid_list_view.html:19
+#: .\templates\standard\reports\progress.html:40
+#: .\templates\standard\reports\result.html:107
+msgid "Дата подачи"
+msgstr "Берілген күні"
+
+#: .\standard\models.py:129
+msgid "Заявка на участие"
+msgstr "Қатысуға өтінім"
+
+#: .\standard\models.py:130
+msgid "Заявки на участие"
+msgstr "Қатысуға өтінімдер"
+
+#: .\standard\models.py:157 .\standard\models.py:166
+msgid "Цена"
+msgstr "Бағасы"
+
+#: .\standard\models.py:163
+msgid "Дата изменения"
+msgstr "Өзгерту күні"
+
+#: .\standard\models.py:167
+msgid "Цены"
+msgstr "Бағалар"
+
+#: .\standard\models.py:192
+msgid "Итог"
+msgstr "Қорытынды"
+
+#: .\standard\models.py:193
+#: .\templates\standard\cards\result_detail_view.html:8
+msgid "Итоги"
+msgstr "Қорытынды"
+
+#: .\standard\tables.py:19
+msgid "Лоты не найдены"
+msgstr "Лоттар табылмады"
+
+#: .\standard\tables.py:31
+msgid "Приложение"
+msgstr "Қосымша"
+
+#: .\standard\tables.py:33
+msgid "Действия"
+msgstr "Әрекеттер"
+
+#: .\standard\views\application.py:45
+msgid "От имени данного клиента уже была подана заявка."
+msgstr "Осы клиенттің атынан өтінім берілген болатын."
+
+#: .\standard\views\application.py:51 .\standard\views\lot.py:210
+msgid "Отсутствуют средства на счету гарантийного обеспечения."
+msgstr "Кепілдік қамтамасыз ету шотында қаражат жоқ."
+
+#: .\standard\views\application.py:83
+msgid "Заявка подана."
+msgstr "Өтінім берілді."
+
+#: .\standard\views\application.py:126
+msgid "Заявка отозвана."
+msgstr ""
+
+#: .\standard\views\application.py:153
+msgid "Заявка допущена."
+msgstr "Өтінім кері қайтарылды."
+
+#: .\standard\views\application.py:205
+msgid "Заявка отклонена."
+msgstr "Өтінім қабылданбады."
+
+#: .\standard\views\bid.py:66
+msgid "От вашей компании уже подано такое ценовое предложение."
+msgstr "Сіздің компанияңыздан осындай баға ұсынысы ұсынылды."
+
+#: .\standard\views\bid.py:71
+msgid "Ценовое предложение не может быть больше стартовой суммы торга."
+msgstr "Баға ұсынысы сауда-саттықтың бастапқы сомасынан аспауы керек."
+
+#: .\standard\views\bid.py:76
+msgid ""
+"Ценовое предложение не может быть больше ранее поданного ценового "
+"предложения."
+msgstr "Баға ұсынысы бұрын берілген баға ұсынысынан артық болуы мүмкін емес."
+
+#: .\standard\views\bid.py:81
+msgid "Ценовое предложение не может быть меньше стартовой суммы торга."
+msgstr "Баға ұсынысы сауда-саттықтың бастапқы сомасынан кем болмауы керек."
+
+#: .\standard\views\bid.py:86
+msgid ""
+"Ценовое предложение не может быть меньше ранее поданного ценового "
+"предложения."
+msgstr "Баға ұсынысы бұрын берілген баға ұсынысынан кем болмауы керек."
+
+#: .\standard\views\lot.py:65
+msgid "Лот создан."
+msgstr "Лот құрылды."
+
+#: .\standard\views\lot.py:168
+msgid "Лот удален."
+msgstr "Лот жойылды."
+
+#: .\standard\views\lot.py:187
+msgid "Начало приема заявок не может быть в прошлом."
+msgstr "Өтінімдерді қабылдауды бастау бұрын болуы мүмкін емес."
+
+#: .\standard\views\lot.py:190
+msgid "Окончание приема заявок не может быть в прошлом."
+msgstr "Өтінімдерді қабылдаудың аяқталуы бұрын болуы мүмкін емес."
+
+#: .\standard\views\lot.py:193
+msgid "Начало аукциона не может быть в прошлом."
+msgstr "Аукционның басталуы өткен болуы мүмкін емес."
+
+#: .\standard\views\lot.py:196
+msgid "Добавьте позицию."
+msgstr "Позицияны қосыңыз."
+
+#: .\standard\views\lot.py:199
+msgid "Загрузите техническую спецификацию."
+msgstr "Техникалық сипаттаманы жүктеп алыңыз."
+
+#: .\standard\views\lot.py:202
+msgid "Загрузите шаблон договора."
+msgstr "Келісім-шарт үлгісін жүктеп алыңыз."
+
+#: .\standard\views\lot.py:223
+msgid "Лот опубликован."
+msgstr "Лот жарияланды."
+
+#: .\standard\views\lot.py:244
+msgid "Примите решение по всем заявкам."
+msgstr "Барлық өтінімдер бойынша шешім қабылдаңыз."
+
+#: .\standard\views\lot.py:253
+msgid "Лот переведен в статус \"Подведение итогов\"."
+msgstr "Лот \"қорытындылау\"мәртебесіне ауыстырылды."
+
+#: .\standard\views\lot.py:260
+msgid "Участники определены."
+msgstr "Қатысушылар анықталды."
+
+#: .\standard\views\lot.py:309
+msgid "Итоги опубликованы."
+msgstr "Қорытындысы жарияланды."
+
+#: .\standard\views\lot.py:360
+msgid "Лот отменен."
+msgstr "Лоттың күші жойылды."
+
+#: .\standard\views\lot.py:363
+msgid "Ошибка."
+msgstr "Қате."
+
+#: .\standard\views\lot.py:403
+msgid "Лот аннулирован."
+msgstr "Лоттың күші жойылды."
+
+#: .\standard\views\position.py:63
+msgid "Позиция создана."
+msgstr "Позиция құрылды."
+
+#: .\standard\views\result.py:26
+msgid "Итоги сформированы"
+msgstr "Қорытындылар қалыптастырылды"
+
+#: .\standard\views\signature.py:46
+msgid "Итоги подписаны."
+msgstr "Қорытындыға қол қойылды."
+
+#: .\templates\base.html:7
+msgid "Главная"
+msgstr "Үй"
+
+#: .\templates\base.html:67 .\templates\log\log_app.html:3
+#: .\templates\log\log_auth.html:3 .\templates\log\log_result.html:3
+msgid "Журнал событий"
+msgstr "Оқиғалар журналы"
+
+#: .\templates\base.html:85 .\templates\registration\login.html:15
+#: .\templates\registration\login.html:46
+#: .\templates\registration\register.html:59
+#: .\templates\registration\signature.html:14
+msgid "Войти"
+msgstr "Кіру"
+
+#: .\templates\base.html:98 .\templates\standard\pages\lot_list.html:4
+msgid "Аукционы"
+msgstr "Аукциондар"
+
+#: .\templates\base.html:104 .\templates\company\pages\client_list.html:3
+#: .\templates\company\pages\client_list.html:12
+msgid "Клиенты"
+msgstr "Клиенттер"
+
+#: .\templates\base.html:109
+msgid "Компания на рассмотрении"
+msgstr "Компания қарауда"
+
+#: .\templates\base.html:114 .\templates\registration\company_add.html:13
+msgid "Прикрепить компанию"
+msgstr "Компанияны тіркеу"
+
+#: .\templates\base.html:124
+msgid "Выйти"
+msgstr "Шығу"
+
+#: .\templates\company\cards\company_filter.html:53
+#: .\templates\standard\cards\lot_filter_form.html:154
+msgid "Поиск"
+msgstr "Іздеу"
+
+#: .\templates\company\pages\client_create.html:3
+#: .\templates\company\pages\client_create.html:12
+#: .\templates\company\pages\client_list.html:17
+msgid "Добавить клиента"
+msgstr "Клиент қосу"
+
+#: .\templates\company\pages\client_create.html:19
+#: .\templates\company\pages\client_edit.html:20
+#: .\templates\standard\pages\application_create.html:28
+#: .\templates\standard\pages\application_reject.html:22
+#: .\templates\standard\pages\bid_list.html:22
+#: .\templates\standard\pages\file_upload.html:20
+#: .\templates\standard\pages\lot_cancel.html:21
+#: .\templates\standard\pages\lot_create.html:27
+#: .\templates\standard\pages\lot_detail.html:20
+#: .\templates\standard\pages\lot_edit.html:25
+#: .\templates\standard\pages\lot_revoke.html:21
+#: .\templates\standard\pages\position_create.html:21
+#: .\templates\standard\pages\position_edit.html:20
+msgid "Назад"
+msgstr "Артқа"
+
+#: .\templates\company\pages\client_create.html:34
+#: .\templates\company\pages\client_edit.html:36
+#: .\templates\standard\pages\lot_cancel.html:38
+#: .\templates\standard\pages\lot_create.html:44
+#: .\templates\standard\pages\lot_revoke.html:38
+#: .\templates\standard\pages\position_create.html:37
+#: .\templates\standard\pages\position_edit.html:36
+msgid "Сохранить"
+msgstr "Сақтау"
+
+#: .\templates\company\pages\client_detail.html:19
+#: .\templates\company\pages\client_edit.html:3
+#: .\templates\standard\cards\position_detail_view.html:15
+msgid "Редактировать"
+msgstr "Өңдеу"
+
+#: .\templates\company\pages\client_detail.html:22
+msgid "Активировать"
+msgstr "Іске қосу"
+
+#: .\templates\company\pages\client_detail.html:34
+#: .\templates\company\pages\company_profile.html:12
+#: .\templates\registration\profile.html:27
+msgid "О компании"
+msgstr "Компания туралы"
+
+#: .\templates\company\pages\client_detail.html:43
+#: .\templates\company\pages\company_profile.html:21
+#: .\templates\registration\profile.html:33
+msgid "БИН"
+msgstr "БИН"
+
+#: .\templates\company\pages\client_detail.html:68
+#: .\templates\company\pages\company_profile.html:46
+#: .\templates\registration\profile.html:58
+msgid "Телефон"
+msgstr "Телефон"
+
+#: .\templates\company\pages\client_detail.html:80
+#: .\templates\company\pages\company_profile.html:57
+#: .\templates\registration\profile.html:20
+msgid "В блоке"
+msgstr "Блокта"
+
+#: .\templates\company\pages\client_detail.html:84
+#: .\templates\company\pages\company_profile.html:59
+#: .\templates\registration\profile.html:22
+msgid "Свободно"
+msgstr "Еркін"
+
+#: .\templates\company\pages\client_edit.html:13
+msgid "Редактировать клиента"
+msgstr "Клиентті өңдеу"
+
+#: .\templates\log\log_app.html:11 .\templates\log\log_auth.html:11
+#: .\templates\log\log_result.html:11
+msgid "Журнал авторизаций"
+msgstr "Авторизация журналы"
+
+#: .\templates\log\log_app.html:14 .\templates\log\log_auth.html:14
+#: .\templates\log\log_result.html:14
+msgid "Журнал заявок на участие"
+msgstr "Қатысуға өтінімдер журналы"
+
+#: .\templates\log\log_app.html:17 .\templates\log\log_auth.html:17
+#: .\templates\log\log_result.html:17
+msgid "Журнал сделок"
+msgstr "Мәмілелер журналы"
+
+#: .\templates\notification.html:27
+msgid "Тема"
+msgstr "Тақырып"
+
+#: .\templates\notification.html:31
+msgid "Содержание"
+msgstr "Мазмұны"
+
+#: .\templates\registration\company_add.html:3
+msgid "Добавить компанию"
+msgstr "Компания қосу"
+
+#: .\templates\registration\company_add.html:30
+#: .\templates\registration\signature.html:32
+#: .\templates\standard\pages\application_create.html:52
+#: .\templates\standard\pages\application_reject.html:55
+#: .\templates\standard\pages\bid_list.html:44
+#: .\templates\standard\pages\file_upload.html:35
+#: .\templates\standard\pages\lot_edit.html:42
+#: .\templates\standard\pages\report_create.html:29
+#: .\templates\standard\pages\signature_create.html:36
+msgid "Подтвердить"
+msgstr "Растау"
+
+#: .\templates\registration\login.html:23
+msgid "Логин и пароль не совпадают. Пожалуйста, попробуйте еще."
+msgstr "Логин мен пароль бірдей емес. Өтінемін, көбірек көріңіз."
+
+#: .\templates\registration\login.html:28
+msgid "Недостаточно прав."
+msgstr "Дұрыс емес."
+
+#: .\templates\registration\login.html:30
+msgid "Пожалуйста, войдите чтобы увидеть эту страницу."
+msgstr "Кіріңіз осы бетті көру үшін."
+
+#: .\templates\registration\login.html:40
+#: .\templates\registration\register.html:40
+msgid "Пароль"
+msgstr "Құпия сөз"
+
+#: .\templates\registration\register.html:14
+msgid "Регистрация"
+msgstr "Тіркеу"
+
+#: .\templates\registration\register.html:22
+msgid "Email"
+msgstr "Email"
+
+#: .\templates\registration\register.html:46
+msgid "Повторите пароль"
+msgstr "Құпия сөзді қайталаңыз"
+
+#: .\templates\registration\register.html:52
+msgid "Пароль должен включать в себя:"
+msgstr "Құпия сөз мыналарды қамтуы керек:"
+
+#: .\templates\registration\register.html:53
+msgid "Минимум 8 символов;"
+msgstr "Кем дегенде 8 таңба;"
+
+#: .\templates\registration\register.html:54
+msgid "По крайней мере один символ в нижнем регистре(a-z);"
+msgstr "Кем дегенде бір кіші әріп таңбасы(а-z);"
+
+#: .\templates\registration\register.html:55
+msgid "По крайней мере один символ в верхнем регистре(A-Z);"
+msgstr "Бас әріптегі кем дегенде бір таңба(A-Z);"
+
+#: .\templates\registration\register.html:56
+msgid "По крайней мере одну цифру (0-9)."
+msgstr "Кем дегенде бір Сан (0-9)."
+
+#: .\templates\registration\signature.html:30
+#: .\templates\standard\pages\signature_create.html:34
+msgid "Подписать"
+msgstr "Қол қою"
+
+#: .\templates\standard\cards\application_grid_view.html:8
+msgid "Заявки на участие в торгах"
+msgstr "Сауда-саттыққа қатысуға өтінімдер"
+
+#: .\templates\standard\cards\bid_list_view.html:5
+msgid "Ценовые предложения"
+msgstr "Баға ұсыныстары"
+
+#: .\templates\standard\cards\bid_list_view.html:25
+msgid "Загрузка"
+msgstr "Жүктеу"
+
+#: .\templates\standard\cards\file_list_view.html:6
+msgid "Файлы"
+msgstr "Файлдар"
+
+#: .\templates\standard\cards\file_list_view.html:10
+#: .\templates\standard\pages\file_upload.html:4
+#: .\templates\standard\pages\file_upload.html:13
+msgid "Загрузить файл"
+msgstr "Файлды жүктеу"
+
+#: .\templates\standard\cards\file_list_view.html:23
+msgid "Удалить"
+msgstr "Жою"
+
+#: .\templates\standard\cards\file_list_view.html:30
+msgid "Файлы не загружены"
+msgstr "Файлдар жүктелмеген"
+
+#: .\templates\standard\cards\file_list_view.html:38
+#: .\templates\standard\reports\admission.html:6
+#: .\templates\standard\reports\admission.html:17
+msgid "Реестр заявок участников"
+msgstr "Қатысушылардың өтінімдер тізілімі"
+
+#: .\templates\standard\cards\file_list_view.html:47
+#: .\templates\standard\reports\result.html:7
+#: .\templates\standard\reports\result.html:22
+msgid "Отчет по биржевой сделке"
+msgstr "Биржалық мәміле бойынша есеп"
+
+#: .\templates\standard\cards\file_list_view.html:56
+#: .\templates\standard\reports\progress.html:7
+#: .\templates\standard\reports\progress.html:22
+msgid "Ценовые предложения участников"
+msgstr "Қатысушылардың баға ұсыныстары"
+
+#: .\templates\standard\cards\lot_detail_view_bidding.html:16
+msgid "Тип торга"
+msgstr "Сауда түрі"
+
+#: .\templates\standard\cards\lot_detail_view_bidding.html:25
+msgid "Начало торгов"
+msgstr "Сауда-саттықтың басталуы"
+
+#: .\templates\standard\cards\lot_detail_view_bidding.html:28
+#: .\templates\standard\cards\lot_detail_view_default.html:102
+#: .\templates\standard\reports\admission.html:26
+msgid "Стартовая сумма"
+msgstr "Бастапқы сома"
+
+#: .\templates\standard\cards\lot_detail_view_default.html:93
+msgid "Брокер-инициатор"
+msgstr "Брокер-бастамашы"
+
+#: .\templates\standard\cards\lot_detail_view_default.html:105
+msgid "Начало приема заявки"
+msgstr "Өтінімді қабылдауды бастау"
+
+#: .\templates\standard\cards\lot_detail_view_default.html:123
+msgid "Причина отмены"
+msgstr "Бас тарту себебі"
+
+#: .\templates\standard\cards\lot_detail_view_default.html:129
+msgid "Причина аннулирования"
+msgstr "Күшін жою себебі"
+
+#: .\templates\standard\cards\position_detail_view.html:19
+#: .\templates\standard\pages\position_create.html:5
+#: .\templates\standard\pages\position_create.html:14
+msgid "Добавить позицию"
+msgstr "Позицияны қосу"
+
+#: .\templates\standard\cards\position_detail_view.html:71
+msgid "Позиция не добавлена"
+msgstr "Позиция қосылмаған"
+
+#: .\templates\standard\cards\result_detail_view.html:16
+msgid "Брокер-победитель"
+msgstr "Жеңімпаз брокер"
+
+#: .\templates\standard\cards\result_detail_view.html:20
+#: .\templates\standard\reports\result.html:125
+msgid "Победитель"
+msgstr "Жеңімпаз"
+
+#: .\templates\standard\cards\result_detail_view.html:24
+msgid "Итоговая сумма"
+msgstr "Қорытынды сома"
+
+#: .\templates\standard\cards\result_detail_view.html:29
+msgid "Не состоялся по причине"
+msgstr "Себеппен болған жоқ"
+
+#: .\templates\standard\cards\result_detail_view.html:37
+msgid "Итоги не сформированы"
+msgstr "Қорытындылар қалыптаспаған"
+
+#: .\templates\standard\columns\app_actions.html:6
+msgid "Допустить"
+msgstr "Рұқсат ету"
+
+#: .\templates\standard\columns\app_actions.html:10
+msgid "Отклонить"
+msgstr "Қабылдамау"
+
+#: .\templates\standard\columns\app_status.html:3
+#: .\templates\standard\reports\admission.html:84
+msgid "по причине"
+msgstr "себеппен"
+
+#: .\templates\standard\columns\lot_status.html:28
+msgid "Сумма экономии"
+msgstr "Үнемдеу сомасы"
+
+#: .\templates\standard\pages\application_create.html:11
+#: .\templates\standard\pages\application_create.html:21
+msgid "Подать заявку на участие"
+msgstr "Қатысуға өтініш беру"
+
+#: .\templates\standard\pages\application_create.html:37
+msgid "Сумма требуемого гарантийного обеспечения для подачи заявки"
+msgstr "Өтінім беру үшін талап етілетін кепілдік қамтамасыз ету сомасы"
+
+#: .\templates\standard\pages\application_create.html:40
+msgid "Сумма свободного гарантийного обеспечения на вашем счету"
+msgstr "Сіздің шотыңыздағы тегін кепілдік сомасы"
+
+#: .\templates\standard\pages\application_reject.html:4
+#: .\templates\standard\pages\application_reject.html:15
+#: .\templates\standard\pages\application_reject.html:31
+msgid "Отклонить заявку"
+msgstr "Өтінімді қабылдамау"
+
+#: .\templates\standard\pages\application_reject.html:46
+msgid "БИН участника"
+msgstr "Қатысушының БСН"
+
+#: .\templates\standard\pages\bid_list.html:5
+#: .\templates\standard\pages\bid_list.html:15
+msgid "Ход торгов"
+msgstr "Сауда-саттық барысы"
+
+#: .\templates\standard\pages\bid_list.html:40
+msgid "Подать ценовое предложение"
+msgstr "Баға ұсынысын беру"
+
+#: .\templates\standard\pages\file_upload.html:31
+msgid "Разрешенные расширения"
+msgstr "Рұқсат етілген кеңейтімдер"
+
+#: .\templates\standard\pages\lot_cancel.html:4
+#: .\templates\standard\pages\lot_cancel.html:14
+msgid "Отменить лот"
+msgstr "Лоттан бас тарту"
+
+#: .\templates\standard\pages\lot_create.html:9
+#: .\templates\standard\pages\lot_create.html:20
+#: .\templates\standard\pages\lot_list.html:20
+msgid "Создать лот"
+msgstr "Лот құру"
+
+#: .\templates\standard\pages\lot_edit.html:10
+#: .\templates\standard\pages\lot_edit.html:18
+msgid "Редактировать лот"
+msgstr "Лот өңдеу"
+
+#: .\templates\standard\pages\lot_list.html:25
+#: .\templates\standard\pages\report_create.html:9
+#: .\templates\standard\pages\report_create.html:23
+msgid "Сформировать отчет"
+msgstr "Есеп қалыптастыру"
+
+#: .\templates\standard\pages\lot_revoke.html:4
+#: .\templates\standard\pages\lot_revoke.html:14
+msgid "Аннулировать лот"
+msgstr "Лоттың күшін жою"
+
+#: .\templates\standard\pages\position_edit.html:5
+#: .\templates\standard\pages\position_edit.html:13
+msgid "Редактировать позицию"
+msgstr "Позицияны өңдеу"
+
+#: .\templates\standard\pages\signature_create.html:4
+msgid "Подписать итоги"
+msgstr "Қорытындыға қол қою"
+
+#: .\templates\standard\pages\signature_create.html:12
+msgid "Подписание итогов"
+msgstr "Қорытындыға қол қою"
+
+#: .\templates\standard\reports\admission.html:21
+#: .\templates\standard\reports\progress.html:25
+#: .\templates\standard\reports\result.html:25
+msgid "Номер отчета"
+msgstr "Есеп нөмірі"
+
+#: .\templates\standard\reports\admission.html:22
+msgid "Cпособ проведения"
+msgstr "Өткізу тәсілі"
+
+#: .\templates\standard\reports\admission.html:23
+msgid "Заказчик аукциона"
+msgstr "Аукционға тапсырыс беруші"
+
+#: .\templates\standard\reports\admission.html:24
+msgid "Брокер заказчика"
+msgstr "Тапсырыс берушінің брокері"
+
+#: .\templates\standard\reports\admission.html:25
+msgid "Дата и время проведения"
+msgstr "Өткізу күні мен уақыты"
+
+#: .\templates\standard\reports\admission.html:35
+msgid "Код номен клатуры"
+msgstr "Номенклатура коды"
+
+#: .\templates\standard\reports\admission.html:64
+msgid "Участники"
+msgstr "Қатысушылар"
+
+#: .\templates\standard\reports\admission.html:71
+msgid "Дата подачи заявки"
+msgstr "Өтінім берілген күн"
+
+#: .\templates\standard\reports\admission.html:92
+#: .\templates\standard\reports\result.html:122
+msgid "Участников нет"
+msgstr "Қатысушылар жоқ"
+
+#: .\templates\standard\reports\admission.html:95
+#: .\templates\standard\reports\admission.html:96
+#: .\templates\standard\reports\admission.html:97
+msgid "ФИО"
+msgstr "Аты-жөні"
+
+#: .\templates\standard\reports\progress.html:33
+#: .\templates\standard\reports\result.html:33
+msgid "Время совершения сделки"
+msgstr "Мәміле жасау уақыты"
+
+#: .\templates\standard\reports\progress.html:39
+msgid "Ценовое предложение"
+msgstr "Баға ұсынысы"
+
+#: .\templates\standard\reports\progress.html:50
+msgid "Ценовых предложений нет"
+msgstr "Баға ұсыныстары жоқ"
+
+#: .\templates\standard\reports\progress.html:72
+#: .\templates\standard\reports\result.html:188
+msgid "Документ подписан электронно-цифровой подписью"
+msgstr "Құжатқа электрондық-цифрлық қолтаңба қойылды"
+
+#: .\templates\standard\reports\result.html:37
+msgid "Параметры аукциона"
+msgstr "Аукцион параметрлері"
+
+#: .\templates\standard\reports\result.html:40
+msgid "№ лота"
+msgstr "№ лоттың"
+
+#: .\templates\standard\reports\result.html:42
+msgid "Инициатор"
+msgstr "Бастамашы"
+
+#: .\templates\standard\reports\result.html:43
+msgid "Брокер инициатора"
+msgstr "Бастамашы Брокер"
+
+#: .\templates\standard\reports\result.html:44
+msgid "Режим торговли"
+msgstr "Сауда режимі"
+
+#: .\templates\standard\reports\result.html:59
+msgid "Описание лота"
+msgstr "Лоттың сипаттамасы"
+
+#: .\templates\standard\reports\result.html:63
+msgid "Способ закупа"
+msgstr "Сатып алу тәсілі"
+
+#: .\templates\standard\reports\result.html:68
+msgid "Приобретение товаров по общему закупу"
+msgstr "Жалпы сатып алу бойынша тауарларды сатып алу"
+
+#: .\templates\standard\reports\result.html:73
+msgid "Условие оплаты"
+msgstr "Төлем шарты"
+
+#: .\templates\standard\reports\result.html:77
+msgid "Условие поставки"
+msgstr "Жеткізу шарты"
+
+#: .\templates\standard\reports\result.html:85
+msgid "Первоначальная сумма закупа (Цена открытия)"
+msgstr "Сатып алудың бастапқы сомасы (ашылу бағасы)"
+
+#: .\templates\standard\reports\result.html:88
+#: .\templates\standard\reports\result.html:152
+msgid "С НДС"
+msgstr "ҚҚС-ПЕН"
+
+#: .\templates\standard\reports\result.html:90
+#: .\templates\standard\reports\result.html:154
+msgid "Без НДС"
+msgstr "ҚҚС жоқ"
+
+#: .\templates\standard\reports\result.html:92
+msgid "Кол-во"
+msgstr "Саны"
+
+#: .\templates\standard\reports\result.html:98
+msgid "Участники биржевого аукциона"
+msgstr "Биржалық аукционға қатысушылар"
+
+#: .\templates\standard\reports\result.html:103
+msgid "Наименование участника"
+msgstr "Қатысушының атауы"
+
+#: .\templates\standard\reports\result.html:106
+#: .\templates\standard\reports\result.html:131
+msgid "Брокер участника"
+msgstr "Қатысушы Брокер"
+
+#: .\templates\standard\reports\result.html:141
+msgid "Параметры заключенной сделки"
+msgstr "Жасалған мәміле параметрлері"
+
+#: .\templates\standard\reports\result.html:144
+msgid "Окончательная сумма закупа (Цена закрытия)"
+msgstr "Сатып алудың соңғы сомасы (жабу бағасы)"
+
+#: .\templates\standard\reports\result.html:147
+msgid "Ед. измерения"
+msgstr "Өлшем бірлігі"
+
+#: .\templates\standard\reports\result.html:150
+msgid "Согласно приложения"
+msgstr "Қосымшаға сәйкес"
+
+#: .\templates\standard\reports\result.html:158
+msgid "Курсы валют на дату заключения сделки"
+msgstr "Мәміле жасалған күнгі валюта бағамдары"

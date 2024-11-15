@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% load variables %}
+
+{% block head_css_page %}
+<link href="{% static 'css/slimselect.min.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+
+{% block title %}{% trans "Подать заявку на участие" %}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Подать заявку на участие" %}</h1>
+            </div>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+            <a class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100" href="{% url 'lot_detail' lot.uuid %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5">
+                    <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"></path>
+                </svg><span class="whitespace-nowrap">{% trans "Назад" %}</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+    {% if lot.guarantee %}
+    <div class="mb-3">
+        {% trans "Сумма требуемого гарантийного обеспечения для подачи заявки" %}: {{ lot.guarantee_amount_sum|intcomma }} тенге
+    </div>
+    <div class="mb-3">
+        {% trans "Сумма свободного гарантийного обеспечения на вашем счету" %}: {{ user.profile.company.balance_guarantee|intcomma }} тенге
+    </div>
+    {% endif %}
+    <form class="space-y-8 divide-y divide-gray-200" action="{% url 'lot_application_create' lot.uuid %}" method="post" enctype="multipart/form-data">
+        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+            <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+                <div class="space-y-6 sm:space-y-5">
+                    {% csrf_token %}
+                    {% include 'bs4_form.html' with form=form %}
+                </div>
+            </div>
+        </div>
+        <div class="pt-5"><div class="flex justify-end"><button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg><span class="whitespace-nowrap">{% trans "Подтвердить" %}</span></button></div></div>
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block footer_javascript_page %}
+<script src="{% static 'js/libs/slimselect.min.js' %}"></script>
+<script>
+new SlimSelect({
+  select: '#client-select',
+  searchPlaceholder: 'Поиск...',
+})
+</script>
+{% endblock footer_javascript_page %}

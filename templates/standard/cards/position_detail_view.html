@@ -1,0 +1,79 @@
+{% load humanize %}
+{% load verbose_names %}
+{% load variables %}
+{% load i18n %}
+
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Позиция" %}</h3>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                {% if lot.company == user.profile.company and lot.status == 'DRAFT' %}
+                    {% if position %}
+                        {% if perms.standard.change_position %}
+                        <a href="{% url 'lot_position_edit' lot.uuid position.pk %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">{% trans "Редактировать" %}</a>
+                        {% endif %}
+                    {% else %}
+                        {% if perms.standard.add_position %}
+                        <a href="{% url 'lot_position_create' lot.uuid %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">{% trans "Добавить позицию" %}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+        </div>
+        {% if position %}
+        <div class="mt-3 border-t border-gray-100">
+        <dl class="grid grid-rows-5 grid-flow-col gap-1">
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "name" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.name }}</dd>
+            </div>
+
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "payment_terms" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.payment_terms }}</dd>
+            </div>
+
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "delivery_days" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.delivery_days }}</dd>
+            </div>
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "delivery_terms" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.delivery_terms }}</dd>
+            </div>
+
+            {% if position.internal_code or position.external_code or position.unified_code %}
+                {% if position.internal_code %}
+                    <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% trans "Код номенклатуры" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.internal_code }}</dd>
+                    </div>
+                {% endif %}
+                {% if position.external_code %}
+                    <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% trans "Код ТНВЭД" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.external_code }}</dd>
+                    </div>
+                {% endif %}
+                {% if position.position.unified_code %}
+                    <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% trans "Код ЕНС ТРУ" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.unified_code }}</dd>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "quantity" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.quantity }} {{ position.unit }}</dd>
+            </div>
+
+            <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% get_verbose_field_name position "price" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ position.price|intcomma }} тенге, {% if lot.vat %}с НДС{% else %}без НДС{% endif %}</dd>
+            </div>
+        </dl>
+        {% else %}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mb-2">{% trans "Позиция не добавлена" %}</div>
+            </div>
+        </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+

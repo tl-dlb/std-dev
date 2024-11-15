@@ -1,0 +1,5 @@
+{% if record.files.first %} 
+<a href="{% url 'file_download' record.files.first.pk %}" download="{{ record.files.first.name }}" target="_blank">{{ record.files.first.name }}</a>
+{% else %} 
+--
+{% endif %} 

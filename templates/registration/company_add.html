@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Добавить компанию" %}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Прикрепить компанию" %}</h1>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+    <form action="{% url 'company_add' %}" method="post" autocomplete="off" class="space-y-8 divide-y divide-gray-200" >
+        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+            <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
+                <div class="space-y-6 sm:space-y-5">
+                    {% csrf_token %}
+                    {% include 'bs4_form.html' with form=form %}
+                    </div>
+            </div>
+        </div>
+        <div class="pt-5"><div class="flex justify-end"><button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="-ml-1 mr-2 h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg><span class="whitespace-nowrap">{% trans "Подтвердить" %}</span></button></div></div>
+    </form>
+
+</div>
+
+{% endblock content %}

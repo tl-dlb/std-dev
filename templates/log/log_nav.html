@@ -1,0 +1,36 @@
+{% load i18n %}
+<main class="mt-2 py-5" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+        <div class="flex items-center space-x-5">
+            <span style="flex: 1 0 0%;" class="block text-center border-0 border-b-2 text-gray-900 hover:border-green-500 py-1 font-normal text-sm {% if request.path == '/ru/log/log_auth/' %} border-green-700 {% endif %}">
+                <a href="{% url 'log_auth' %}">
+                    {% trans "Журнал авторизаций" %}
+                </a>
+                <a href="{% url 'download_report' 'log_auth' %}?{{ request.GET.urlencode }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block align-middle" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 12a.75.75 0 0 1-.53-.22l-3.25-3.25a.75.75 0 0 1 1.06-1.06L10 10.94l2.72-2.72a.75.75 0 0 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-.53.22z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </span>
+
+            <span style="flex: 1 0 0%;" class="block text-center border-0 border-b-2 text-gray-900 hover:border-green-500 py-1 font-normal text-sm {% if request.path == '/ru/log/log_app/' %} border-green-700 {% endif %}">
+                <a href="{% url 'log_app' %}">{% trans "Журнал заявок на участие" %}</a>
+                <a href="{% url 'download_report' 'log_app' %}?{{ request.GET.urlencode }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block align-middle" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 12a.75.75 0 0 1-.53-.22l-3.25-3.25a.75.75 0 0 1 1.06-1.06L10 10.94l2.72-2.72a.75.75 0 0 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-.53.22z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </span>
+            <span style="flex: 1 0 0%;" class="block text-center border-0 border-b-2 text-gray-900 hover:border-green-500 py-1 font-normal text-sm {% if request.path == '/ru/log/log_result/' %} border-green-700 {% endif %}">
+                <a href="{% url 'log_result' %}">{% trans "Журнал сделок" %}</a>
+                <a href="{% url 'download_report' 'log_result' %}?{{ request.GET.urlencode }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block align-middle" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 12a.75.75 0 0 1-.53-.22l-3.25-3.25a.75.75 0 0 1 1.06-1.06L10 10.94l2.72-2.72a.75.75 0 0 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-.53.22z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 10 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </span>
+        </div>
+
+</main>

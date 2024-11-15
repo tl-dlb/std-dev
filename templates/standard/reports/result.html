@@ -1,0 +1,209 @@
+{% load humanize %}
+{% load tz %}
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>{% trans "Отчет по биржевой сделке" %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+@page {
+    size: A4;
+    margin: 1cm;  
+}
+{% include './pdf_result.css' %}  
+</style>
+</head>
+
+<body>
+<table class="list">
+    <thead>
+        <tr class="blue">
+            <td colspan="8" class="center"><span class="title">{% trans "Отчет по биржевой сделке" %}</span></td>
+        </tr>
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Номер отчета" %}:</td>
+            <td colspan="4" class="center">{{ lot.number }}</td>
+        </tr> 
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Дата отчета" %}:</td>
+            <td colspan="4" class="center">{% now "d/m/Y" %}</td>
+        </tr>
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Время начала торговой сессии" %}:</td>
+            <td colspan="4" class="center">{{ lot.bidding_begin|date:"d.m.Y H:i:s" }}.{{ lot.bidding_begin.microsecond|stringformat:".3d" }}</td>
+        </tr>
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Время окончания торговой сессии" %}:</td>
+            <td colspan="4" class="center">{{ lot.bidding_end|date:"d.m.Y H:i:s" }}.{{ lot.bidding_end.microsecond|stringformat:".3d" }}</td>
+        </tr>
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Время совершения сделки" %}:</td>
+            <td colspan="4" class="center">{{ lot.bidding_end|date:"d.m.Y H:i:s" }}.{{ lot.bidding_end.microsecond|stringformat:".3d" }}</td>
+        </tr> 
+        <tr class="khaki">
+            <td colspan="8" class="center"><span class="lil-title">{% trans "Параметры аукциона" %}</span></td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="1" class="center"><span class="lil-title">{% trans "№ лота" %}</span></td>
+            <td colspan="1" class="center"><span class="">{{ lot.number }}</span></td>
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Инициатор" %}</span></td>
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Брокер инициатора" %}</span></td>
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Режим торговли" %}</span></td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Наименование" %}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.client.name }}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.company.name }}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.get_platform_display }}</span></td>   
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "БИН/Прочее" %}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.client.idn }}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.company.idn }}</span></td>
+            <td colspan="2" class="center"><span class="center">{{ lot.get_type_display }}</span></td>   
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Описание лота" %}</span></td>
+            <td colspan="6" class="center"><span class="center">{{ lot.name }}</span></td>  
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Способ закупа" %}</span></td>
+            <td colspan="6" class="center"><span class="center">
+            {% if lot.subsoil == True %}
+            {% trans "В целях недропользования" %}
+            {% else %}
+            {% trans "Приобретение товаров по общему закупу" %}
+            {% endif %}
+            </span></td>  
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Условие оплаты" %}</span></td>
+            <td colspan="6" class="center"><span class="center">{{ position.payment_terms }}</span></td>  
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Условие поставки" %}</span></td>
+            <td colspan="6" class="center"><span class="center">{{ position.delivery_terms }}</span></td>  
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Срок поставки" %}</span></td>
+            <td colspan="6" class="center"><span class="center">{{ position.delivery_days }}</span></td>  
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center"><span class="lil-title">{% trans "Первоначальная сумма закупа (Цена открытия)" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{{ position.sum|intcomma }} тенге</span></td>
+            {% if lot.vat is True %}
+                <td colspan="1" class="center"><span class="center">{% trans "С НДС" %}</span></td>
+            {% else %}
+                <td colspan="1" class="center"><span class="center">{% trans "Без НДС" %}</span></td>
+            {% endif %}
+            <td colspan="1" class="center"><span class="center">{% trans "Кол-во" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{{ position.quantity }}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "Единица измерения" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{{ position.unit }}</span></td> 
+        </tr>
+        <tr class="blue">
+            <td colspan="8" class="center"><span class="lil-title">{% trans "Участники биржевого аукциона" %}</span></td>
+        </tr>
+        {% if applications.all %}
+        <tr class="blue">
+            <td colspan="1" class="center"><span class="center">№</span></td>
+            <td colspan="2" class="center"><span class="center">{% trans "Наименование участника" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "БИН/Прочее" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "Биржевой идентификатор" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "Брокер участника" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "Дата подачи" %}</span></td>
+            <td colspan="1" class="center"><span class="center">{% trans "Статус" %}</span></td>
+        </tr>
+        {% for application in applications %} 
+        <tr class="blue">
+            <td colspan="1" class="center">{{ forloop.counter }}</td>
+            <td colspan="2" class="center">{% if application.client.name|length < 25 %}{{ application.client.name }}{% else %}{{ application.client.name|slice:"0:25" }}<br>{{ application.client.name|slice:"25:50" }}{% endif %}</td>
+            <td colspan="1" class="center">{{ application.client.idn }}</td>
+            <td colspan="1" class="center">{{ application.client.exchange_id }}</td>
+            <td colspan="1" class="center">{% if application.company.name|length < 15 %}{{ application.company.name }}{% else %}{{ application.company.name|slice:"0:15" }}<br>{{ application.company.name|slice:"15:30" }}{% endif %}</td>
+            <td colspan="1" class="center">{{ application.created_at|date:"d.m.Y H:i:s.u" }}</td>
+            <td colspan="1" class="center">{{ application.get_status_display }}</td>
+        </tr>
+        {% endfor %} 
+        {% else %}
+            <tr class="blue"><td colspan="8" class="center">{% trans "Участников нет" %}</td></tr>
+        {% endif %}
+        <tr class="khaki">
+            <td colspan="8" class="center"><span class="lil-title">{% trans "Победитель" %}</span></td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="2" class="center">{% trans "Наименование" %}</td>
+            <td colspan="2" class="center">{% trans "БИН/Прочее" %}</td>
+            <td colspan="2" class="center">{% trans "Биржевой идентификатор" %}</td>
+            <td colspan="2" class="center">{% trans "Брокер участника" %}</td>
+        </tr>
+        {% if lot.status == 'COMPLETED' %}
+        <tr class="khaki">
+            <td colspan="2" class="center">{% if lot.result.bid.application.client.name|length < 28 %}{{ lot.result.bid.application.client.name }}{% else %}{{ lot.result.bid.application.client.name|slice:"0:28" }}<br>{{ lot.result.bid.application.client.name|slice:"28:50" }}{% endif %}</td>
+            <td colspan="2" class="center">{{ lot.result.bid.application.client.idn }}</td>
+            <td colspan="2" class="center">{{ lot.result.bid.application.client.exchange_id }}</td>
+            <td colspan="2" class="center">{% if lot.result.bid.application.company.name|length < 28 %}{{ lot.result.bid.application.company.name }}{% else %}{{ lot.result.bid.application.company.name|slice:"0:28" }}<br>{{ lot.result.bid.application.company.name|slice:"28:50" }}{% endif %}</td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="8" class="center"><span class="lil-title">{% trans "Параметры заключенной сделки" %}</span></td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="1" class="center" rowspan="2">{% trans "Окончательная сумма закупа (Цена закрытия)" %}</td>
+            <td colspan="1" class="center">{% trans "С НДС" %}</td>
+            <td colspan="1" class="center">{{ sum_with_vat|intcomma }} тенге</td>
+            <td colspan="1" class="center" rowspan="2">{% trans "Ед. измерения" %}</td>
+            <td colspan="1" class="center" rowspan="2">{{ position.unit }}</td>
+            <td colspan="1" class="center" rowspan="2">{% trans "Цена за единицу" %}</td>
+            <td colspan="1" class="center" rowspan="2">{% trans "Согласно приложения" %}</td>
+            <td colspan="1" class="center" rowspan="2">{% trans "Кол-во:" %} {{ position.quantity }}</td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="1" class="center">{% trans "Без НДС" %}</td>
+            <td colspan="1" class="center">{{ sum_without_vat|intcomma }} тенге</td>
+        </tr>
+        <tr class="khaki">
+            <td colspan="8" class="center"><span class="lil-title">{% trans "Курсы валют на дату заключения сделки" %}</span></td>
+        </tr>
+        {% endif %}
+        <tr class="khaki">
+            <td colspan="1" class="center">CNY/тенге</td>
+            <td colspan="1" class="center">{{cny}}</td>
+            <td colspan="1" class="center">EUR/тенге</td>
+            <td colspan="1" class="center">{{eur}}</td>
+            <td colspan="1" class="center">USD/тенге</td>
+            <td colspan="1" class="center">{{usd}}</td>
+            <td colspan="1" class="center">RUB/тенге</td>
+            <td colspan="1" class="center">{{rub}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td >
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+        </tr>
+        <tr class="padding-y">
+            <td colspan="8" class="center">
+                <span class="lil-title">
+                    {% trans "Документ подписан электронно-цифровой подписью" %}:
+                    {{lot.result.signature.name}},
+                    {{lot.result.signature.company}},
+                    {{lot.result.signature.bin}},
+                    {{lot.result.signature.created_at}}
+                </span>
+            </td>   
+        </tr>
+        <tr>
+            <td colspan="8" class="center"><span></span>{{lot.result.signature.company}} </td>
+        </tr>
+    </thead>
+</table>
+</body>

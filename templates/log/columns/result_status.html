@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if record.lot.status == 'COMPLETED' %}
+    <span style="color: green;">{% trans "Завершен" %}</span>
+{% elif record.lot.status == 'NOT_COMPLETED'%}
+    <span style="color: red;">{% trans "Не состоялся" %}</span>
+{% elif record.lot.status == 'CANCELLED' %}
+    <span style="color: yellow;">{% trans "Отменен" %}</span>
+{% elif record.lot.status == 'REVOKED'%}
+    <span style="color: yellow;">{% trans "Аннулирован" %}</span>
+{% else %}
+    {{record.lot.status}}
+{% endif %}

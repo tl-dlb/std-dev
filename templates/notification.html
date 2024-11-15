@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Новое уведомление{% endblock title %}
+{% block extra_css %}
+<link href="{% static 'css/slimselect.min.css' %}" rel="stylesheet" media="screen">
+{% endblock extra_css %}
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-9">
+                                <div class="card">
+                                    <div class="card-header align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">Уведомление</h4>
+                                    </div><!-- end card header -->
+                                    <div class="card-body">
+                                        <div class="table-card">
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="fw-bold" style="width:30%;">{% trans 'Тема' %}</td>
+                                                        <td>{{ notification.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="fw-bold">{% trans 'Содержание' %}</td>
+                                                        <td>{{ notification.content }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table><!--end table-->
+                                        </div><!-- /table-card-->
+                                    </div><!--/card-body-->
+                                </div><!--/card-->
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                    <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+            {% block footer %}
+            {% include "partials/footer.html" %}
+            {% endblock footer %}
+            </div>
+            <!-- end main content-->
+{% endblock content %}

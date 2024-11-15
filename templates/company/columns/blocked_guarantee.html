@@ -1,0 +1,6 @@
+{% load humanize %}
+{% if record.blocked_guarantee %}
+{{ record.blocked_guarantee|intcomma }}
+{% else %}
+--
+{% endif %}

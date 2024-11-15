@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load variables %}
+{% load i18n %}
+{% block head_css_page %}
+<link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+
+{% block title %}{% trans "Сформировать отчет" %}{% endblock title %}
+
+{% block content %}
+
+<!--{% load django_bootstrap_breadcrumbs %}-->
+<!--{% block breadcrumbs %}-->
+<!--{% breadcrumb 'Главная' 'home_page' %}-->
+<!--{% breadcrumb 'Аукционы' 'lot_list' %}-->
+<!--{% breadcrumb 'Сформировать отчет' 'lot_file_report' %}-->
+<!--{% endblock %}-->
+<!--{% render_breadcrumbs %}-->
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl  md:flex md:items-center md:justify-between md:space-x-5 lg:px-6">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Сформировать отчет" %}</h1>
+            </div>
+        </div>
+    </div>
+</main>
+<div class='card bg-white m-3 mx-4 max-w-8xl px-4 rounded shadow-md pt-4'>
+
+                <form action="{% url 'lot_file_report' %}" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {% include 'bs4_form.html' with form=form %}
+                    <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">{% trans "Подтвердить" %}</button>
+                </form>
+</div>
+
+
+{% endblock content %}
+
+{% block footer_javascript_page %}
+<script src="{% static 'js/libs/flatpickr/flatpickr.js' %}"></script>
+<script src="{% static 'js/libs/flatpickr/ru.js' %}"></script>
+<script>
+flatpickr('.datepicker', {
+    locale:     'ru',
+    dateFormat: 'd.m.Y',
+});
+</script>
+{% endblock footer_javascript_page %}

@@ -1,0 +1,66 @@
+::-ms-clear {
+  display: none;
+}
+
+::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+@font-face {
+  font-weight: 100;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Thin.ttf);
+}
+
+@font-face {
+  font-weight: 200;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-UltraLight.ttf);
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Light.ttf);
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: Gilroy;
+  src: url(/static/fonts/Gilroy-Regular.ttf);
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Medium.ttf);
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Semibold.ttf);
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Bold.ttf);
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Black.ttf);
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: ui-sans-serif;
+  src: url(/static/fonts/Gilroy-Heavy.ttf);
+}
+
+body {
+    --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}

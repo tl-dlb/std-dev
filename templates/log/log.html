@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head_css_page %}
+<link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+{% block title %}{% trans "Журнал событий" %}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+{% if user.groups.all.0.name  == 'operator' or user.is_staff %}
+{% include "log/log_nav.html" %}
+{% elif not user.groups.all.0.name  == 'observer' and user.profile.company.status == 'ACTIVE'%}
+<main class="mt-2 py-5">
+    <div class="mx-auto max-w-screen-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
+        <div class="flex items-center space-x-5">
+            <div>
+                {% if request.path == '/ru/log/log_app/' %}
+                <h1 class="text-2xl font-bold text-gray-900"> {% trans "Заявки" %} </h1>
+                <a href="{% url 'download_report' 'log_app' %}?{{ request.GET.urlencode }}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Скачать отчет</a>
+                {% elif request.path == '/ru/log/log_result/' %}
+                <h1 class="text-2xl font-bold text-gray-900"> {% trans "Сделки" %} </h1>
+                <a href="{% url 'download_report' 'log_result' %}?{{ request.GET.urlencode }}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Скачать отчет</a>
+                <a href="{% url 'download_result' %}?{{ request.GET.urlencode }}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">Скачать отчеты биржевых сделок</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/libs/flatpickr/flatpickr.js' %}"></script>
+    <script src="{% static 'js/libs/flatpickr/ru.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr('.datepicker', {
+                dateFormat: 'd.m.Y',
+                locale:     'ru',
+            });
+
+            const form = document.querySelector('.filter-form');
+            const inputs = form.querySelectorAll('input, select');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    form.submit();
+                });
+            });
+        });
+    </script>
+
+<div class="card bg-white p-4 mb-3 rounded shadow-sm">
+    <div class="card-body p-0">
+        <form method="get" class="filter-form flex d-flex flex-row flex-wrap">
+            {% csrf_token %}
+                {% for filter in filter.form %}
+                    <div class="flex-grow" style="width: 0;">
+                        {{ filter }}
+                    </div>
+                {% endfor %}
+        </form>
+        <div class="table-responsive">
+            {% load django_tables2 %}
+            {% render_table table %}
+        </div>
+    </div>
+</div>
+
+    <nav class="flex items-center justify-between mb-8 px-4 sm:px-0 pb-4">
+    <div class="flex w-0 flex-1">
+        <span class="inline-flex items-center pt-4 pl-4 text-sm font-bold text-gray-500">
+            {{ table.page.start_index }} - {{ table.page.end_index }} из {{ table.page.paginator.count }}
+        </span>
+    </div>
+    {% for num in table.page.paginator.page_range %}
+        <a href="?{{ request.GET.urlencode }}&page={{ num }}" class="inline-flex items-center mx-1 px-4 mt-4 py-2 rounded-full text-sm font-bold border-transparent text-gray-500 hover:border-green-700 hover:text-gray-700">{{ num }}</a>
+    {% endfor %}
+</nav>
+{% endblock content %}

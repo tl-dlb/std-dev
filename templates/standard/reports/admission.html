@@ -1,0 +1,101 @@
+{% load humanize %}
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>{% trans "Реестр заявок участников" %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+@page {
+    size: A4 landscape;
+    margin: 1cm;  
+}
+{% include './pdf.css' %}  
+</style>
+</head>
+<body>
+<h1 class="title">{% trans "Реестр заявок участников" %}</h1>
+
+<table class="details">
+    <tbody>
+        <tr><td class="label">{% trans "Номер отчета" %}</td><td class="text">{{ lot.number }}</td></tr>
+        <tr><td class="label">{% trans "Cпособ проведения" %}</td><td class="text">{{ lot.get_type_display }}</td></tr>
+        <tr><td class="label">{% trans "Заказчик аукциона" %}</td><td class="text">{{ lot.company.name }}</td></tr>
+        <tr><td class="label">{% trans "Брокер заказчика" %}</td><td class="text">{{ lot.client.name }}</td></tr>
+        <tr><td class="label">{% trans "Дата и время проведения" %}</td><td class="text">{{ lot.bidding_begin }}</td></tr>
+        <tr><td class="label">{% trans "Стартовая сумма" %}</td><td class="text">{{ lot.sum|intcomma }} тенге, {% if lot.vat %}с НДС{% else %}без НДС{% endif %}</td></tr>
+    </tbody>
+</table>
+
+<h1 class="subtitle">{% trans "Позиция" %}</h1>
+<table class="list">
+    <thead>
+        <tr>
+            <th style="width:10%;">{% trans "Наименование" %}</th>
+            <th style="width:7%;">{% trans "Код номен клатуры" %}</th>
+            <th style="width:7%;">{% trans "Код ТНВЭД" %}</th>
+            <th style="width:7%;">{% trans "Код ЕНС ТРУ" %}</th>
+            <th style="width:9%;">{% trans "Единица измерения" %}</th>
+            <th style="width:10%;">{% trans "Количество" %}</th>
+            <th style="width:10%;">{% trans "Цена за единицу" %}</th>
+            <th style="width:10%;">{% trans "Сумма" %}</th>
+            <th style="width:10%;">{% trans "Условия оплаты" %}</th>
+            <th style="width:10%;">{% trans "Срок поставки" %}</th>
+            <th style="width:10%;">{% trans "Условия поставки" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{% if position.name|length < 10 %}{{ position.name }}{% else %}{{ position.name|slice:"0:10" }}<br>{{ position.name|slice:"10:20" }}{% endif %}</td>
+            <td>{% if position.internal_code|length > 0 %}{{ position.internal_code }}{% else %}--{% endif %}</td>
+            <td>{% if position.external_code|length > 0 %}{{ position.external_code }}{% else %}--{% endif %}</td>
+            <td>{% if position.unified_code|length > 0 %}{{ position.unified_code }}{% else %}--{% endif %}</td>
+            <td>{{ position.unit }}</td>
+            <td>{{ position.quantity }}</td>
+            <td>{{ position.price|intcomma }}</td>
+            <td>{{ position.sum|intcomma }}</td>
+            <td>{{ position.payment_terms }}</td>
+            <td>{{ position.delivery_days }}</td>
+            <td>{{ position.delivery_terms }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1 class="subtitle">{% trans "Участники" %}</h1>
+{% if applications.all %}
+<table class="list">
+    <thead>
+        <tr>
+            <th style="width:25%;">{% trans "Брокер" %}</th>
+            <th style="width:25%;">{% trans "Участник" %}</th>
+            <th style="width:25%;">{% trans "Дата подачи заявки" %}</th>
+            <th style="width:25%;">{% trans "Статус" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in applications %} 
+            <tr>
+                <td>{% if application.company.name|length < 50 %}{{ application.company.name }}{% else %}{{ application.company.name|slice:"0:50" }}<br>{{ application.company.name|slice:"50:100" }}{% endif %}</td>
+                <td>{% if application.client.name|length < 40 %}{{ application.client.name }}{% else %}{{ application.client.name|slice:"0:40" }}<br>{{ application.client.name|slice:"40:80" }}{% endif %}</td>
+                <td>{{ application.created_at|date:"d.m.Y H:i:s.u" }}</td>
+                <td>
+                    {{ application.get_status_display }}
+                    {% if application.status == 'REJECTED' %} 
+                        {% trans "по причине" %}: {{ application.rejected_event_comment }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %} 
+    </tbody>
+</table>
+{% else %}
+<span class="empty-text">{% trans "Участников нет" %}</span>
+{% endif %}
+
+<!--<p class="text">{% trans "ФИО" %}_____________________________{% trans "Подпись" %}________________</p>-->
+<!--<p class="text">{% trans "ФИО" %}_____________________________{% trans "Подпись" %}________________</p>-->
+<!--<p class="text">{% trans "ФИО" %}_____________________________{% trans "Подпись" %}________________</p>-->
+
+</body>
+</html>
+

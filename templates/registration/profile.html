@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}{% trans "Профиль" %}{% endblock title %}
+
+{% block content %}
+
+<div class="mx-5 items-start max-w-[25rem] min-h-[40rem] bg-white rounded-lg my-5 shadow-md">
+    <div class="flex-grow p-6">
+        <h3 class="text-xl font-bold leading-7 flex justify-start text-gray-900 ">{{ user.get_username }}</h3>
+        <h2 class="text-2xl font-light mb-5 text-gray-900 flex justify-start">{{ user.first_name }} {{ user.last_name }}</h2>
+        {% if perms.company.view_company %}
+        {% if company.clearing_code %}
+        <div class="w-full p-5 px-7 my-2 shadow-lg rounded-md bg-green-900">
+            <div class="flex justify-end items-end">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-4 text-white">
+                    <path fill-rule="evenodd" d="M9.674 2.075a.75.75 0 01.652 0l7.25 3.5A.75.75 0 0117 6.957V16.5h.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H3V6.957a.75.75 0 01-.576-1.382l7.25-3.5zM11 6a1 1 0 11-2 0 1 1 0 012 0zM7.5 9.75a.75.75 0 00-1.5 0v5.5a.75.75 0 001.5 0v-5.5zm3.25 0a.75.75 0 00-1.5 0v5.5a.75.75 0 001.5 0v-5.5zm3.25 0a.75.75 0 00-1.5 0v5.5a.75.75 0 001.5 0v-5.5z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-2">
+            <dt class="text-md font-medium text-white">{% trans "В блоке" %}</dt>
+            <dd class="mt-1 text-md text-white font-light sm:col-span-2 sm:mt-0">{{ company.blocked_guarantee|intcomma }}₸</dd>
+            <dt class="text-md font-medium text-white">{% trans "Свободно" %}</dt>
+            <dd class="mt-1 text-md text-white font-light sm:col-span-2 sm:mt-0">{{ company.balance_guarantee|intcomma }}₸</dd>
+            </div>
+        </div>
+        {% endif %}
+        <div class="mt-5">
+            <dl class="font-medium">{% trans "О компании" %}
+                <div class="py-1  sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Наименование" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.name }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "БИН" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.idn }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Тип" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.get_type_display }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Статус" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.get_status_display }}</dd>
+                </div>
+                {% if company.address %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Адрес" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.address }}</dd>
+                </div>
+                {% endif %}
+                {% if company.email %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "E-mail" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.email }}</dd>
+                </div>
+                {% endif %}
+                {% if company.phone %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Телефон" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.phone }}</dd>
+                </div>
+                {% endif %}
+                {% if company.bank_details %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Банковские реквизиты" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ company.bank_details }}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

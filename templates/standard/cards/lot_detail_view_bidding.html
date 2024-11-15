@@ -1,0 +1,39 @@
+{% load humanize %}
+{% load i18n %}
+
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Лот" %} {{ lot.number }}</h3>
+            <span class="mt-1 text-sm text-gray-900 font-light sm:col-span-2 sm:mt-0"></span>
+        </div>
+        <div class="mt-3 border-t border-gray-100">
+            <dl class="grid grid-rows-5 grid-flow-col gap-1" style="display: flex;">
+                <div div style="width: 50%; display: inline-block; box-sizing: border-box;">
+                <div class="py-3 mr-20"><dt class="text-sm font-medium text-gray-500">{% trans "Наименование" %}</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.name }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Тип торга" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.get_type_display }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Статус" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.get_status_display }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Заказчик" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.company.name }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Начало торгов" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.bidding_begin }}</dd>
+                </div>
+                <div class="py-3"><dt class="text-sm font-medium text-gray-500">{% trans "Стартовая сумма" %}</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.sum|intcomma }} тенге</dd>
+                </div>
+                </div>
+                {% include "standard/cards/countdown_list.html" with lot=lot %}
+            </dl>
+
+        </div>
+    </div>
+</div>
+
+

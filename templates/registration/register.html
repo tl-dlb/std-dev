@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+
+{% block head_css_page %}
+	<link href="{% static 'css/auth.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+
+{% block content %}
+<div class="flex min-h-full flex-col py-24 sm:px-6 lg:px-8">
+	<div class="sm:mx-auto sm:w-full sm:max-w-md">
+		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">{% trans "Регистрация" %}</h2>
+	</div>
+	<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+		<div class="bg-transparent py-8 px-4 sm:rounded-lg sm:px-10">
+		<form method="post" action="{% url 'auth_register' %}" class="space-y-6">
+		{% csrf_token %}
+
+		<div>
+			<label for="email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
+			<div class="mt-1">
+				<input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+			</div>
+		</div>
+		<div>
+			<label for="cert" class="block text-sm font-medium text-gray-700"></label>
+			<div class="mt-1">
+				<input hidden="" required="" readonly id="cert" name="cert" type="text" autocomplete="cert">
+			</div>
+		</div>
+			<input hidden type="text" name="idn" class="form-control" id="idn">
+		<div>
+			<label for="username" class="block text-sm font-medium text-gray-700"></label>
+			<div class="mt-1">
+				<input id="username" name="username" type="username" autocomplete="username" required="" readonly class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+			</div>
+		</div>
+		<div>
+			<label for="password1" class="block text-sm font-medium text-gray-700">{% trans "Пароль" %}</label>
+			<div class="mt-1">
+				<input id="password1" name="password1" type="password" autocomplete="current-password" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+			</div>
+		</div>
+		<div>
+			<label for="password2" class="block text-sm font-medium text-gray-700">{% trans "Повторите пароль" %}</label>
+			<div class="mt-1">
+				<input id="password2" name="password2" type="password" autocomplete="current-password" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+			</div>
+		</div>
+		<div>
+			<p>{% trans "Пароль должен включать в себя:" %} </p>
+			<p>{% trans "Минимум 8 символов;" %}</p>
+			<p>{% trans "По крайней мере один символ в нижнем регистре(a-z);" %}</p>
+			<p>{% trans "По крайней мере один символ в верхнем регистре(A-Z);" %}</p>
+			<p>{% trans "По крайней мере одну цифру (0-9)." %}</p>
+		</div>
+		<div>
+			<button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-green-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1">{% trans "Войти" %}</button>
+		</div>
+
+		</form>
+		<script>
+			document.getElementById('idn').value = '{{ idn }}';
+			document.getElementById('username').value = '{{ username }}';
+        	document.getElementById('cert').value = '{{ cert }}';
+    	</script>
+		</div>
+	</div>
+</div>
+{% endblock %}

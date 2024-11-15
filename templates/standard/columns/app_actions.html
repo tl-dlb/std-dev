@@ -1,0 +1,26 @@
+{% load i18n %}
+{% if record.lot.status == 'ADMISSION' %}
+    {% if record.lot.subsoil and record.lot.company == user.profile.company %}
+
+        {% if record.status in 'PENDING,REJECTED' %}
+            <a href="{% url 'lot_application_admit' record.lot.uuid record.pk %}" 
+               class="btn btn-outline-secondary btn-sm"><i class="fas fa-check"></i>{% trans "Допустить" %}</a>
+        {% endif %}
+        {% if record.status in 'PENDING,ADMITTED' %}
+            <a href="{% url 'lot_application_reject' record.lot.uuid record.pk %}" 
+               class="btn btn-outline-secondary btn-sm"><i class="fas fa-times"></i>{% trans "Отклонить" %}</a>
+        {% endif %}
+    {% elif not record.lot.subsoil and user.groups.all.0.name  == 'operator' %}
+                {% if record.status in 'PENDING,REJECTED' %}
+                    <a href="{% url 'lot_application_admit' record.lot.uuid record.pk %}"
+                       class="btn btn-outline-secondary btn-sm"><i class="fas fa-check"></i>{% trans "Допустить" %}</a>
+                {% endif %}
+                {% if record.status in 'PENDING,ADMITTED' %}
+                    <a href="{% url 'lot_application_reject' record.lot.uuid record.pk %}"
+                       class="btn btn-outline-secondary btn-sm"><i class="fas fa-times"></i>{% trans "Отклонить" %}</a>
+                {% endif %}
+    {% endif %}
+{% else %}
+--
+{% endif %} 
+

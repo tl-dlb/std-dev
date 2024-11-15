@@ -1,0 +1,19 @@
+[Unit]
+Description=ASGI for STD
+After=network.target
+After=nginx.service
+
+[Service]
+User=nginx
+Group=nginx
+WorkingDirectory=/var/www/std
+#Environment=DJANGO_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#Environment=DJANGO_ALLOWED_HOSTS=myapp.chatbot.ai
+ExecStart=/var/www/std/service-asgi.sh start
+ExecStop=/var/www/std/service-asgi.sh stop
+Restart=always
+Type=forking
+#Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

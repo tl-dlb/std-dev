@@ -1,0 +1,6 @@
+{% load humanize %}
+{% if record.balance_guarantee %}
+{{ record.balance_guarantee|intcomma }}
+{% else %}
+--
+{% endif %}

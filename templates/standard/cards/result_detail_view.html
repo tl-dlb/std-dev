@@ -1,0 +1,45 @@
+{% load humanize %}
+{% load i18n %}
+{% if lot.status in 'SUMMARIZING,COMPLETED,NOT_COMPLETED,CANCELLED,REVOKED' %}
+
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5 mb-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Итоги" %}</h3>
+        </div>
+
+        <div class="mt-3 border-t border-gray-100">
+            {% if lot.result %}
+
+                {% if lot.result.status == 'HAS_WINNER' %}
+                <div class="py-1  sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Брокер-победитель" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.result.bid.application.company.name }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Победитель" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.result.bid.application.client.name }}</dd>
+                </div>
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Итоговая сумма" %}</dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.result.bid.sum|intcomma }} тенге</dd>
+                </div>
+                {% else %}
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Не состоялся по причине" %}: </dt>
+                    <dd class="mt-1 pl-4 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ lot.result.get_status_display }}.</dd>
+                </div>
+                {% endif %}
+
+            {% else %}
+
+                <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
+                    <dt class="text-sm font-medium text-gray-500">{% trans "Итоги не сформированы" %}</dt>
+                </div>
+
+            {% endif %}
+        </div>
+        {% else %}
+    </div>
+</div>
+{% endif %}

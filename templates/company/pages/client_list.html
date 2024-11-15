@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Клиенты" %}{% endblock title %}
+
+{% block content %}
+
+{% include 'messages.html' %}
+<main class="mt-2 py-5">
+    <div class="mx-auto px-5 md:flex md:items-center md:justify-between md:space-x-5">
+        <div class="flex items-center space-x-5">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{% trans "Клиенты" %}</h1>
+            </div>
+        </div>
+        <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+            {% if perms.company.add_company and user.groups.all.0.name  == 'broker' %}
+            <a href="{% url 'client_create' %}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100">{% trans "Добавить клиента" %}</a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+    <div class="card bg-white m-3 mx-4 max-w-8xl px-4 rounded shadow-md pb-4">
+        {% include 'company/cards/company_filter.html' with form=form %}
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                {% load django_tables2 %}
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+
+<nav class="flex items-center justify-between mb-8 px-4 sm:px-0 pb-4">
+    <div class="flex w-0 flex-1">
+        <span class="inline-flex items-center pt-4 pl-4 text-sm font-bold text-gray-500">
+            {{ table.page.start_index }} - {{ table.page.end_index }} из {{ table.page.paginator.count }}
+        </span>
+    </div>
+    {% for num in table.page.paginator.page_range %}
+        <a href="?page={{ num }}" class="inline-flex items-center px-4 mt-4 py-2 rounded-full text-sm font-bold border-transparent text-gray-500 hover:border-green-700 hover:text-gray-700">{{ num }}</a>
+    {% endfor %}
+</nav>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="mx-auto max-w-screen-2xl bg-white py-6 mt-4 rounded-md shadow-md px-5">
+    <div>
+        <div>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">{% trans "Ценовые предложения" %}</h3>
+        </div>
+        <div class="mt-3 border-t border-gray-100">
+            <div class="card-body p-0">
+                <div id="bid-table">
+                    <div class="table-container">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                {% if visible %}
+                                    <th style="width:33.33%;">{% trans "Дата подачи" %}</th>
+                                    <th style="width:33.33%;">{% trans "Сумма" %}</th>
+                                    <th style="width:33.33%;">{% trans "Компания" %}</th>
+                                {% else %}
+                                    <th style="width:50%;">{% trans "Дата подачи" %}</th>
+                                    <th style="width:50%;">{% trans "Сумма" %}</th>
+                                {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td {% if visible %}colspan="3"{% else %}colspan="2"{% endif %}">{% trans "Загрузка" %}...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="card mb-3 rounded shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            {% load django_tables2 %}
+            {% render_table table %}
+        </div>
+    </div>
+</div>
+<nav class="flex items-center justify-between mb-8 px-4 sm:px-0 pb-4">
+    <div class="flex w-0 flex-1">
+        <span class="inline-flex items-center pt-4 pl-4 text-sm font-bold text-gray-500">
+            {{ table.page.start_index }} - {{ table.page.end_index }} из {{ table.page.paginator.count }}
+        </span>
+    </div>
+    {% for num in table.page.paginator.page_range %}
+        <a href="?page={{ num }}" class="inline-flex items-center mx-1 px-4 mt-4 py-2 rounded-full text-sm font-bold border-transparent text-gray-500 hover:border-green-700 hover:text-gray-700">{{ num }}</a>
+    {% endfor %}
+</nav>

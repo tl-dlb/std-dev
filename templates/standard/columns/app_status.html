@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if record.status == 'REJECTED' %}
+    {{ record.get_status_display }} {% trans "по причине" %}: {{ record.rejected_event_comment }}
+{% else %}
+    {{ record.get_status_display }} 
+{% endif %}

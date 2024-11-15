@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load humanize %}
+{% if record.status == 'DRAFT' %}
+<span class="color-secondary"><i class="fas fa-file fa-fw"></i></span>
+{% elif record.status == 'PUBLISHED' %}
+<span class="color-primary"><i class="fas fa-file-upload fa-fw"></i></span>
+{% elif record.status == 'PENDING' %}
+<span class="color-primary"><i class="fas fa-spinner fa-fw"></i></span>
+{% elif record.status == 'SUBMISSION' %}
+<span class="color-primary"><i class="far fa-envelope-open fa-fw"></i></span>
+{% elif record.status == 'ADMISSION' %}
+<span class="color-primary"><i class="fas fa-spinner fa-fw"></i></span>
+{% elif record.status == 'BIDDING' %}
+<span style="color: #1978a2;"><i class="fas fa-hand-holding-usd fa-fw"></i></span>
+{% elif record.status == 'SUMMARIZING' %}
+<span class="color-primary"><i class="fas fa-spinner fa-fw"></i></span>
+{% elif record.status == 'COMPLETED' %}
+<span class="color-success"><i class="fas fa-check fa-fw"></i></span>
+{% elif record.status == 'NOT_COMPLETED' %}
+<span class="color-danger"><i class="fas fa-times fa-fw"></i></span>
+{% elif record.status == 'CANCELLED' %}
+<span class="color-danger"><i class="fas fa-ban fa-fw"></i></span>
+{% else %}
+<span style="color: #070f19;"><i class="far fa-dot-circle fa-fw"></i></span>
+{% endif %}
+{{ record.get_status_display }}
+{% if record.status == 'COMPLETED' and record.type == 'AUCTION_DOWN' and record.economy %}
+<span class="badge badge-primary me-1" data-toggle="tooltip" data-placement="bottom" title='{% trans "Сумма экономии" %}'>
+{{ record.economy }}%
+</span>
+{% endif %}

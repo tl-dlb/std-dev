@@ -1,0 +1,108 @@
+{% load static %}
+
+@font-face {
+	font-family: 'Times New Roman';
+	src: url("{% static 'fonts/TimesNewRoman.ttf' %}");
+}
+
+@font-face {
+    font-family: 'Times New Roman';
+    src: url("{% static 'fonts/TimesNewRomanBold.ttf' %}");
+    font-weight: bold;
+}
+
+@font-face {
+	font-family: 'GothamPro';
+	src: url("{% static 'fonts/GothamPro.ttf' %}");
+}
+
+@font-face {
+    font-family: 'GothamPro';
+    src: url("{% static 'fonts/GothamProBold.ttf' %}");
+    font-weight: bold;
+}
+
+body {
+    font-family: 'Times New Roman', sans-serif;
+	font-size: 14px;
+    word-break: break-all;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.lil-title {
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.center {
+	text-align: center;	
+}
+.label {
+	font-weight: 700;
+}
+
+.subtitle {
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 0;
+}
+
+.text {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.empty-text {
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+.details .label {
+	width: 30%;
+	font-weight: 700;
+}
+
+.details .text {
+	width: 70%;
+}
+
+.list {
+	font-size: 12px;
+	margin: 0 0 25px;
+	padding: 0;
+}
+
+.list td {
+	border: 1px solid black;
+	padding: 3px 3px 0;
+}
+
+.list th {
+	border: 1px solid black;
+	padding: 3px 3px 0;
+	background-color: rgb(229, 228, 226);
+	font-weight: 700;
+	text-align: left;
+}
+
+.footer {
+	margin-top: 10px;
+}
+
+.blue {
+	background-color: rgb(238, 244, 249);
+}
+
+.khaki {
+	background-color: rgb(247, 253, 241);
+}
+
+.padding-y {
+	padding: 10px;
+}

@@ -1,0 +1,10 @@
+{% load i18n %}
+{% if record.status == 'ADMITTED' %}
+    <span style="color: green;">{% trans "Допущена" %}</span>
+{% elif record.status == 'WITHDRAWN' %}
+    <span style="color: red;">{% trans "Отозвана" %}</span>
+{% elif record.status == 'REJECTED' %}
+    <span style="color: red;">{% trans "Отклонена" %}</span>
+{% elif record.status == 'PENDING' %}
+    {% trans "На рассмотрении" %}
+{% endif %}

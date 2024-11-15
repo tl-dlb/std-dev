@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Вход" %}{% endblock title %}
+
+{% block content %}
+
+
+{% include 'messages.html' %}
+
+
+<div class="flex min-h-full flex-col py-24 sm:px-6 lg:px-8">
+	<div class="sm:mx-auto sm:w-full">
+		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">{% trans "Войти" %}</h2>
+	</div>
+	<div class="mt-8">
+		<div class="bg-transparent items-center py-8 px-4 sm:rounded-lg sm:px-10">
+
+        <textarea class="form-control" rows="5" id="xmlToSign" readonly hidden="hidden">
+        <Data></Data>
+        </textarea>
+
+        <form method="post" id="signature-form" >
+            
+            {% csrf_token %}
+            {% include 'bs4_form.html' with form=form %}
+
+        </form>
+            <div class='flex justify-center mt-5'>
+                <button class="mr-2 w-80 rounded-md border border-transparent bg-green-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1" 
+                    onclick="signXmlCall()">{% trans "Подписать" %}</button>
+                <button class="w-80 rounded-md border border-transparent bg-green-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1" 
+                    id="submit-button">{% trans "Подтвердить" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block footer_javascript_page %}
+<script src="{% static 'js/libs/jquery.min.js' %}"></script>
+<script src="{% static 'js/libs/ncalayer/process-ncalayer-calls.js' %}"></script>
+<script src="{% static 'js/libs/ncalayer/ncalayer.js' %}"></script>
+<script src="{% static 'js/libs/ncalayer/jquery.blockUI.js' %}"></script>
+<script>
+const form = document.querySelector('#signature-form');
+document.querySelector('#submit-button').addEventListener('click', function(e) {
+    form.submit();
+});
+</script>
+{% endblock footer_javascript_page %}
+

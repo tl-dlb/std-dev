@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% if record.lot.status == 'ADMITTED' %}
+    {% if record.lot.company == user.profile.company %}
+        {{ record.client.name }} ({{ record.client.idn }})
+    {% else %}
+        {% trans "Участник" %}
+    {% endif %}
+{% else %}
+    {{ record.client.name }} ({{ record.client.idn }})
+{% endif %}

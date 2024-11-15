@@ -1,0 +1,89 @@
+{% load widget_tweaks %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% for field in form.visible_fields %}
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+        {% if field.field.widget.input_type != 'checkbox' %}
+            <label class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">{{ field.label }}</label>
+        {% endif %}
+
+        {% if form.is_bound %}
+            {% if field.errors %}
+
+                {% if field.field.widget.attrs.class  %}
+                    {% render_field field|add_class:"is-invalid" %}
+                {% elif field.field.widget.input_type == 'select' %}
+                    {% render_field field class="form-select is-invalid" %}
+                {% elif field.field.widget.input_type == 'checkbox' %}
+                    <div class="relative flex items-start">
+                        <div class="flex h-5 items-center">
+                            {% render_field field class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %}
+                        </div>
+
+                    </div>
+                {% else %}
+                    {% render_field field class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-invalid" %}
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+
+            {% else %}
+
+                {% if field.field.widget.attrs.class  %}
+                    {% render_field field|add_class:"is-valid" %}
+                {% elif field.field.widget.input_type == 'select' %}
+                    {% render_field field class="form-select is-valid" %}
+                {% elif field.field.widget.input_type == 'checkbox' %}
+                    <div class="relative flex items-start">
+                <div class="flex h-5 items-center">
+                    {% render_field field class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %}
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="is_vat" class="font-medium text-gray-700">{{ field.label }}</label>
+                </div>
+            </div>
+                {% else %}
+                    {% render_field field class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid" %}
+                {% endif %}
+
+            {% endif %}
+        {% else %}
+
+            {% if field.field.widget.attrs.class  %}
+                {% render_field field %}
+            {% elif field.field.widget.input_type == 'select' %}
+                {% render_field field class="border-gray-300 border rounded-md bg-white text-left shadow-sm hover:cursor-pointer css-11vi78b-control" %}
+
+            {% elif field.field.widget.input_type == 'checkbox' %}
+                <div class="relative flex items-start">
+                <div class="flex h-5 items-center">
+                    {% render_field field class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %}
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="is_vat" class="font-medium text-gray-700">{{ field.label }}</label>
+                </div>
+                </div>
+            {% else %}
+                {% render_field field class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm" %}
+            {% endif %}
+
+        {% endif %}
+
+        {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+    </div>
+{% endfor %}

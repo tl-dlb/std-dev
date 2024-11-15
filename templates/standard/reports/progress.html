@@ -1,0 +1,84 @@
+{% load humanize %}
+{% load tz %}
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>{% trans "Ценовые предложения участников" %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+@page {
+    size: A4;
+    margin: 1cm;  
+}
+{% include './pdf_result.css' %}  
+</style>
+</head>
+
+<body>
+<table class="list">
+    <thead>
+        <tr class="blue">
+            <td colspan="8" class="center"><span class="title">{% trans "Ценовые предложения участников" %}</span></td>
+        </tr>
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Номер отчета" %}:</td>
+            <td colspan="4" class="center">{{ lot.number }}</td>
+        </tr> 
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Дата отчета" %}:</td>
+            <td colspan="4" class="center">{% now "d/m/Y" %}</td>
+        </tr> 
+        <tr class="blue">
+            <td colspan="4" class="lil-title center">{% trans "Время совершения сделки" %}:</td>
+            <td colspan="4" class="center">{{ lot.bidding_end }}</td>
+        </tr> 
+        {% if bids.all %}
+            <tr class="khaki">
+                <td colspan="3" class="lil-title center">{% trans "Брокер" %}</th>
+                <td colspan="3" class="lil-title center">{% trans "Ценовое предложение" %}</th>
+                <td colspan="2" class="lil-title center">{% trans "Дата подачи" %}</th>
+            </tr>
+            {% for bid in bids %} 
+                <tr class="khaki">
+                    <td colspan="3" class="center">{{ bid.application.company.name }}</td>
+                    <td colspan="3" class="center">{{ bid.sum|intcomma }} тенге</td>
+                    <td colspan="2" class="center">{{ bid.created_at|date:"d.m.Y H:i:s.u" }}</td>
+                </tr>
+            {% endfor %} 
+        {% else %}
+        <span class="empty-text">{% trans "Ценовых предложений нет" %}</span>
+        {% endif %}
+        <tr>
+            <td colspan="8" class="center"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td >
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+            <td colspan="2">
+                <img src="data:image/png;base64,{{ img|safe }}">
+            </td>
+        </tr>
+        <tr class="padding-y">
+            <td colspan="8" class="center">
+                <span class="lil-title">
+                    {% trans "Документ подписан электронно-цифровой подписью" %}:
+                    {{lot.result.signature.created_by.first_name}} {{lot.result.signature.created_by.last_name}}, 
+                    {{lot.result.signature.created_by.profile.company.name}}, 
+                    BIN{{lot.result.signature.created_by.profile.company.idn}}
+                </span>
+            </td>   
+        </tr>
+        <tr>
+            <td colspan="8" class="center"><span></span></td>
+        </tr>
+    </thead>
+</table>
+</body>

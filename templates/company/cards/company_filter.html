@@ -1,0 +1,98 @@
+{% load i18n %}
+{% load static %}
+<!--<div class="max-w-screen-3xl my-4 md:ml-0">-->
+<!--<form id="search-form">-->
+<!--    <div class="row">-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text" -->
+<!--                    name="name" -->
+<!--                    id="name-input"-->
+<!--                    placeholder="Наименование"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.name.value %}-->
+<!--                    value="{{ form.name.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <input  type="text" -->
+<!--                    name="idn" -->
+<!--                    id="idn-input"-->
+<!--                    placeholder="БИН/ИИН"-->
+<!--                    class="block max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-md sm:text-sm is-valid"-->
+<!--                    {% if form.idn.value %}-->
+<!--                    value="{{ form.idn.value }}"-->
+<!--                    {% endif %}-->
+<!--                    >-->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <select name="status" class="border-gray-300 border rounded-md bg-white text-left shadow-sm hover:cursor-pointer css-11vi78b-control" id="status-select">-->
+<!--                <option value="ALL"      {% if form.status.value == "ALL"      %}selected{% endif %}>Все статусы</option>-->
+<!--                <option value="PENDING"  {% if form.status.value == "PENDING"  %}selected{% endif %}>На рассмотрении</option>-->
+<!--                <option value="ACTIVE"   {% if form.status.value == "ACTIVE"   %}selected{% endif %}>Активен</option>-->
+<!--                <option value="INACTIVE" {% if form.status.value == "INACTIVE" %}selected{% endif %}>Не активен</option>-->
+<!--            </select>   -->
+<!--        </div>-->
+<!--        <div class="col-lg-2 mb-3">-->
+<!--            <div class="btn-group w-100" role="group">-->
+<!--                <button class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100" id="submit-button"><i class="fas fa-search me-2"></i>Искать</button>-->
+<!--                <button class="btn btn-outline-secondary" id="reset-button"><i class="fas fa-times"></i></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>     -->
+<!--</form>-->
+<!--</div>-->
+
+<form id="search-form" class="grid grid-cols-3 gap-4">
+    <div class="col-span-2">
+        <div class="relative  text-gray-400 focus-within:text-gray-600">
+            <div class="pointer-events-none pl-5 absolute inset-y-0 left-0 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 flex-shrink-0">
+                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input name="search" id="search-input" placeholder='{% trans "Поиск" %}...' type="text"
+                   class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"
+                   {% if form.search.value %}
+                        value="{{ form.search.value }}"
+                   {% endif %}
+            >
+        </div>
+    </div>
+    {% if user.groups.all.0.name  == 'operator' %}
+    <div class="col-span-1">
+        <div class="ml-4 flex-1">
+            <select name="status" class="hidden h-full w-full border-0 pt-3 pl-12 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block" id="status-select">
+                <option value="ALL"      {% if form.status.value == "ALL"      %}selected{% endif %}>Все статусы</option>
+                <option value="PENDING"  {% if form.status.value == "PENDING"  %}selected{% endif %}>На рассмотрении</option>
+                <option value="ACTIVE"   {% if form.status.value == "ACTIVE"   %}selected{% endif %}>Активен</option>
+                <option value="BLOCKED" {% if form.status.value == "BLOCKED" %}selected{% endif %}>Заблокирован</option>
+            </select>
+        </div>
+    </div>
+    {% endif %}
+</form>
+
+{% block footer_javascript_page %}
+
+
+<script>
+
+const form = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-input');
+const statusSelect = document.querySelector('#status-select');
+
+searchInput.addEventListener('change', updateFormAndSubmit);
+statusSelect.addEventListener('change', updateFormAndSubmit);
+
+function updateFormAndSubmit() {
+    const searchValue = searchInput.value;
+    const statusValue = statusSelect.value;
+
+    form.querySelector('[name="search"]').value = searchValue;
+    form.querySelector('[name="status"]').value = statusValue;
+
+    form.submit();
+}
+</script>
+{% endblock footer_javascript_page %}
+    

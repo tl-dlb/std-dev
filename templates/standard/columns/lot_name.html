@@ -1,0 +1,16 @@
+{% if record.type == 'AUCTION_DOWN' %}
+  <span class="color-danger" style="color: #ff4238;">&#x2193;</span>
+{% else %}
+  <span class="color-success" style="color: #15c15d;">&#x2191;</span>
+{% endif %}
+
+<b><a href="{% url 'lot_detail' record.uuid %}" class="me-1">{{ record.name }}</a></b>
+{% if record.qualification %}
+<span class="badge badge-primary me-1" data-toggle="tooltip" data-placement="bottom" title="Предквалификационный отбор">ПКО</span>
+{% endif %}
+{% if record.subsoil %}
+<span class="badge badge-primary me-1" data-toggle="tooltip" data-placement="bottom" title="В целях недропользователи">НП</span>
+{% endif %}
+{% if record.guarantee %}
+<span class="badge badge-primary me-1" data-toggle="tooltip" data-placement="bottom" title="Гарантийное обеспечение">ГО</span>
+{% endif %}

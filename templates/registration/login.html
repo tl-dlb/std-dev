@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block head_css_page %}
+	<link href="{% static 'css/auth.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+
+{% block content %}
+
+<div class="flex min-h-full flex-col py-24 sm:px-6 lg:px-8">
+	<div class="sm:mx-auto sm:w-full sm:max-w-md">
+		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">{% trans "Войти" %}</h2>
+	</div>
+	<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+		<div class="bg-transparent py-8 px-4 sm:rounded-lg sm:px-10">
+			<form method="post" action="{% url 'login' %}" class="space-y-6">
+				{% csrf_token %}
+				{% if next %}
+					{% if user.is_authenticated %}
+						<p>{% trans "Недостаточно прав." %}</p>
+					{% else %}
+						<p>{% trans "Пожалуйста, войдите чтобы увидеть эту страницу." %}</p>
+					{% endif %}
+				{% endif %}
+				<div>
+					<label for="username" class="block text-sm font-medium text-gray-700">{% trans "Логин" %}</label>
+					<div class="mt-1">
+						<input id="username" name="username" type="username" autocomplete="username" required="" readonly class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+					</div>
+				</div>
+				<div>
+					<label for="password" class="block text-sm font-medium text-gray-700">{% trans "Пароль" %}</label>
+					<div class="mt-1">
+						<input id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+					</div>
+				</div>
+				<div>
+					<button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-green-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1">{% trans "Войти" %}</button>
+				</div>
+			</form>
+			<script>
+				document.getElementById('username').value = '{{ profile }}';
+			</script>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
