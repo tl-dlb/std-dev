@@ -8,7 +8,7 @@ from clearing.models import Wallet, Statement
 from company.models import Company
 from logs.models import Log
 from django.contrib.auth.models import User
-URL = 'https://test-app.kazclearing.kz/api'
+URL = ''
 
 funds_free = URL + '/funds/free'
 funds_hold = URL + '/funds/hold'
@@ -116,9 +116,7 @@ def free(id, account_number, id_oper):
 
 def create_company(data):
     return post(payload=data, url=URL +'/company/create')
-
 def create_client(data, id_broker):
-
     return post(payload=data, url=URL+f'/company/{id_broker}/add-client')
 
 

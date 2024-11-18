@@ -32,12 +32,12 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.add_message(request, messages.SUCCESS, gettext('Аккаунт создан.'))
-            Profile.objects.create(user=user, idn=form.data['idn'], signature=form.data['cert'])
+            Profile.objects.create(user=user)
             return redirect('home_page')
         else:
             for field in form.errors:
                 messages.add_message(request, messages.WARNING, form.errors[field].as_text())
-            return redirect('auth_signature')
+            # return redirect('auth_signature')
     else:
         form = NewUserForm()
     return render(request=request, template_name="registration/register.html", context={"form": form})
@@ -82,8 +82,8 @@ def auth_signature(request):
 def profile(request):
     profile = get_profile_or_403(request=request)
     company = profile.company
-    if company.clearing_code:
-        get_wallet(company.idn)
+    # if company.clearing_code:
+    #     get_wallet(company.idn)
     return render(request, 'registration/profile.html', {'company': company})
 
 @login_required
@@ -97,36 +97,36 @@ def add_company(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             idn = form.cleaned_data['idn']
-            bin = re.search(r"OU=BIN(\d+)", request.user.profile.signature).group(1)
-            if idn == bin:
-                company = form.save(commit=False)
-                if company.type == 'OBSERVER':
-                    group = Group.objects.get(name='observer')
-                    request.user.groups.add(group)
-                elif company.type == 'TRADER':
-                    response = wallet(company.idn)
-                    if not response:
-                        data = {'type': 'TRADER',
-                                'name': company.name,
-                                'bin': company.idn,
-                                'address': company.address,
-                                'email': company.email
-                                }
-                        response_clearing = create_company(data)
-                        if response_clearing:
-                            response = wallet(company.idn)
-                        else:
-                            messages.add_message(request, messages.SUCCESS, gettext('Ошибка клиринга.'))
-                            return render(request, 'registration/company_add.html', {'form': form})
-                if company.type == 'TRADER':
-                    Wallet.objects.create(idn=company.idn,
-                                          account_number=response['account_number'],
-                                          currency_code=response['currency_code'],
-                                          deposited_amount=response['deposited_amount'],
-                                          holding_amount=response['holding_amount'],
-                                          locked_amount=response['locked_amount'],
-                                          available_amount=response['available_amount'],
-                                          )
+            # bin = re.search(r"OU=BIN(\d+)", request.user.profile.signature).group(1)
+            # if idn == bin:
+            company = form.save(commit=False)
+            if company.type == 'OBSERVER':
+                group = Group.objects.get(name='observer')
+                request.user.groups.add(group)
+            elif company.type == 'TRADER':
+                # response = wallet(company.idn)
+                # if not response:
+                #     data = {'type': 'TRADER',
+                #             'name': company.name,
+                #             'bin': company.idn,
+                #             'address': company.address,
+                #             'email': company.email
+                #             }
+                #     response_clearing = create_company(data)
+                #     if response_clearing:
+                #         response = wallet(company.idn)
+                #     else:
+                #         messages.add_message(request, messages.SUCCESS, gettext('Ошибка клиринга.'))
+                #         return render(request, 'registration/company_add.html', {'form': form})
+                # if company.type == 'TRADER':
+                #     Wallet.objects.create(idn=company.idn,
+                #                           account_number=response['account_number'],
+                #                           currency_code=response['currency_code'],
+                #                           deposited_amount=response['deposited_amount'],
+                #                           holding_amount=response['holding_amount'],
+                #                           locked_amount=response['locked_amount'],
+                #                           available_amount=response['available_amount'],
+                #                           )
                 company.status = 'PENDING'
                 company.created_by = request.user
                 company.updated_by = request.user
@@ -139,9 +139,9 @@ def add_company(request):
 
                 messages.add_message(request, messages.SUCCESS, gettext('Компания создана.'))
                 return render(request, 'company/pages/company_profile.html', {'company': request.user.profile.company})
-            else:
-                messages.add_message(request, messages.SUCCESS, 'БИН не совпадает с БИН в ЭЦП. Попробуйте еще раз.')
-                form = CompanyForm()
+            # else:
+            #     messages.add_message(request, messages.SUCCESS, 'БИН не совпадает с БИН в ЭЦП. Попробуйте еще раз.')
+            #     form = CompanyForm()
     else:
         form = CompanyForm()
     return render(request, 'registration/company_add.html', {'form': form})

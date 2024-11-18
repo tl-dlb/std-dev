@@ -108,24 +108,24 @@ def detail(request, uuid):
             admission = True
 
     apps_table = ApplicationTable(apps)
-    if request.POST:
-        if lot.status in 'BIDDING,SUMMARIZING,COMPLETED,NOT_COMPLETED,REVOKED' and visible or admission:
-            captcha_response = request.POST.get('g-recaptcha-response')
-            if captcha_response:
-                data = {
-                    'secret': RECAPTCHA_PRIVATE_KEY,
-                    'response': captcha_response,
-                }
-                verify_response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-                verify_result = verify_response.json()
-                if not verify_result.get('success', False):
-                    messages.add_message(request, messages.WARNING, gettext('Ошибка CAPTCHA. Пожалуйста, повторите попытку.'))
-                    return redirect('lot_detail', uuid=lot.uuid)
-                else:
-                    return redirect('lot_bid_list', uuid=lot.uuid)
-            else:
-                messages.add_message(request, messages.WARNING, gettext('Ошибка CAPTCHA. Пожалуйста, повторите попытку.'))
-                return redirect('lot_detail', uuid=lot.uuid)
+    # if request.POST:
+    #     if lot.status in 'BIDDING,SUMMARIZING,COMPLETED,NOT_COMPLETED,REVOKED' and visible or admission:
+    #         captcha_response = request.POST.get('g-recaptcha-response')
+    #         if captcha_response:
+    #             data = {
+    #                 'secret': RECAPTCHA_PRIVATE_KEY,
+    #                 'response': captcha_response,
+    #             }
+    #             verify_response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+    #             verify_result = verify_response.json()
+    #             if not verify_result.get('success', False):
+    #                 messages.add_message(request, messages.WARNING, gettext('Ошибка CAPTCHA. Пожалуйста, повторите попытку.'))
+    #                 return redirect('lot_detail', uuid=lot.uuid)
+    #             else:
+    #                 return redirect('lot_bid_list', uuid=lot.uuid)
+    #         else:
+    #             messages.add_message(request, messages.WARNING, gettext('Ошибка CAPTCHA. Пожалуйста, повторите попытку.'))
+    #             return redirect('lot_detail', uuid=lot.uuid)
 
     return render(request, 'standard/pages/lot_detail.html', {
         'visible'   : visible,
@@ -135,7 +135,7 @@ def detail(request, uuid):
         'apps'      : apps,
         'apps_count': apps_count,
         'apps_table': apps_table,
-        'public_key': RECAPTCHA_PUBLIC_KEY
+        # 'public_key': RECAPTCHA_PUBLIC_KEY
     })
 
 
@@ -351,8 +351,8 @@ def summarize(request, uuid):
     lot.save()
 
     # lot_result(lot)
-    if result.status == 'HAS_WINNER':
-        deal(lot)
+    # if result.status == 'HAS_WINNER':
+    #     deal(lot)
     messages.add_message(request, messages.SUCCESS, gettext('Итоги опубликованы.'))
     return redirect('lot_detail', uuid=lot.uuid)
 

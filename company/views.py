@@ -24,8 +24,8 @@ from integration.requests import company_create
 def list(request):
     profile = get_profile_or_403(request=request)
     clients = selectors.get_clients(request=request)
-    for client in clients:
-        get_wallet(client.idn)
+    # for client in clients:
+    #     get_wallet(client.idn)
     table = ClientTable(clients)
 
     rows_per_page = 10
@@ -52,34 +52,34 @@ def create(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            response = wallet(company.idn)
-            if not response:
-                data = {'type': 'CLIENT',
-                        'name': company.name,
-                        'bin': company.idn,
-                        'address': company.address,
-                        'email': company.email
-                        }
-                response_clearing = create_client(data,profile.company.idn)
-                if response_clearing:
-                    response = wallet(company.idn)
-                else:
-                    messages.add_message(request, messages.SUCCESS, gettext('Ошибка клиринга.'))
-                    return render(request, 'company/pages/client_create.html', {'form': form})
+            # response = wallet(company.idn)
+            # if not response:
+            #     data = {'type': 'CLIENT',
+            #             'name': company.name,
+            #             'bin': company.idn,
+            #             'address': company.address,
+            #             'email': company.email
+            #             }
+            #     response_clearing = create_client(data,profile.company.idn)
+            #     if response_clearing:
+            #         response = wallet(company.idn)
+            #     else:
+            #         messages.add_message(request, messages.SUCCESS, gettext('Ошибка клиринга.'))
+            #         return render(request, 'company/pages/client_create.html', {'form': form})
 
             company.status = 'PENDING'
             company.created_by = request.user
             company.updated_by = request.user
             company.save()
             profile.company.clients.add(company)
-            Wallet.objects.create(idn=company.idn,
-                                  account_number=response['account_number'],
-                                  currency_code=response['currency_code'],
-                                  deposited_amount=response['deposited_amount'],
-                                  holding_amount=response['holding_amount'],
-                                  locked_amount=response['locked_amount'],
-                                  available_amount=response['available_amount'],
-                                  )
+            # Wallet.objects.create(idn=company.idn,
+            #                       account_number=response['account_number'],
+            #                       currency_code=response['currency_code'],
+            #                       deposited_amount=response['deposited_amount'],
+            #                       holding_amount=response['holding_amount'],
+            #                       locked_amount=response['locked_amount'],
+            #                       available_amount=response['available_amount'],
+            #                       )
             messages.add_message(request, messages.SUCCESS,
                                  gettext('Компания создана и добавлена к вашему списку клиентов. Ожидается подтверждение.'))
             return redirect('client_detail', id=company.id)
@@ -108,7 +108,7 @@ def create(request):
 def detail(request, id):
     profile = get_profile_or_403(request=request)
     company = get_object_or_404(Company, pk=id)
-    get_wallet(company.idn)
+    # get_wallet(company.idn)
     traders = company.clients.all()
     trader_table = TraderTable(traders)
     return render(request, 'company/pages/client_detail.html', {'company': company, 'table': trader_table})

@@ -111,15 +111,15 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'NAME': 'test_std',
+        'NAME': 'new_std',
         'ENGINE': 'django.db.backends.postgresql',
         'OPTIONS': {
             'options': '-c search_path=standard'
         },
-        'HOST': '192.168.130.15',
+        'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'passw0rd13!',
+        'PASSWORD': 'postgres',
     },
 }
 
@@ -162,8 +162,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-LOGIN_URL = '/auth/signature'
+#
+# LOGIN_URL = '/auth/signature'
+# LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
 
 BREADCRUMBS_TEMPLATE = [BASE_DIR / 'templates/breadcrumbs.html']

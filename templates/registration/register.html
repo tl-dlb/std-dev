@@ -24,17 +24,17 @@
 				<input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
 			</div>
 		</div>
-		<div>
-			<label for="cert" class="block text-sm font-medium text-gray-700"></label>
-			<div class="mt-1">
-				<input hidden="" required="" readonly id="cert" name="cert" type="text" autocomplete="cert">
-			</div>
-		</div>
+<!--		<div>-->
+<!--			<label for="cert" class="block text-sm font-medium text-gray-700"></label>-->
+<!--			<div class="mt-1">-->
+<!--				<input hidden="" required="" readonly id="cert" name="cert" type="text" autocomplete="cert">-->
+<!--			</div>-->
+<!--		</div>-->
 			<input hidden type="text" name="idn" class="form-control" id="idn">
 		<div>
-			<label for="username" class="block text-sm font-medium text-gray-700"></label>
+			<label for="username" class="block text-sm font-medium text-gray-700">{% trans "Логин" %}</label>
 			<div class="mt-1">
-				<input id="username" name="username" type="username" autocomplete="username" required="" readonly class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+				<input id="username" name="username" type="username" autocomplete="username" required=""  class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
 			</div>
 		</div>
 		<div>
@@ -61,11 +61,11 @@
 		</div>
 
 		</form>
-		<script>
-			document.getElementById('idn').value = '{{ idn }}';
-			document.getElementById('username').value = '{{ username }}';
-        	document.getElementById('cert').value = '{{ cert }}';
-    	</script>
+<!--		<script>-->
+<!--			document.getElementById('idn').value = '{{ idn }}';-->
+<!--			document.getElementById('username').value = '{{ username }}';-->
+<!--        	document.getElementById('cert').value = '{{ cert }}';-->
+<!--    	</script>-->
 		</div>
 	</div>
 </div>
